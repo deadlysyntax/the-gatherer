@@ -24,14 +24,12 @@ module OutriderTools
       starting_uri  = URI.parse( starting_at )    #
       seen_pages    = Set.new                     # Keep track of what we've seen
 
-
-
       crawl_page = ->(page_uri) do              # A re-usable mini-function
         unless seen_pages.include?(page_uri)
           seen_pages << page_uri                # Record that we've seen this
           begin
             # Get the page
-            doc = Nokogiri.HTML( open(page_uri, :http_basic_authentication => ['', ''])) 
+            doc = Nokogiri.HTML( open( page_uri)) 
             
             # Yield page and URI to the block passed in 
             each_page.call(doc,page_uri)        
@@ -46,6 +44,8 @@ module OutriderTools
 
           rescue OpenURI::HTTPError # Guard against 404s
             warn "Skipping invalid link #{page_uri}"
+          rescue OpenURI::ArgumentError
+            warn "Skipping page that causes open-uri argument error"
           end
           
         end
@@ -135,6 +135,10 @@ module OutriderTools
        YAML::load( File.read( File.dirname(__FILE__) + "/data/#{project}/#{filename}") )
     end
     
+    
+    def self.load_file base, filename
+      File.expand_path(File.join(File.dirname(base), filename ))
+    end
     
   end
   

@@ -8,28 +8,25 @@ require_relative "outrider/project"
 # Provides an interface as to what commands can be run
 class Outrider
   
-  attr_reader :command_list, :project
+  
+  attr_reader :command_list, :project, :db, :config
+  
+  
   
   # When initialized, do so with our base project facade,
   # and change it later once everything else is initialized based on the specified project
   def initialize
     @project      = Project.new
-    
-
-    # TODO clean this shit
-     # Fuck this is ugly
-     db_config = YAML::load( File.open( File.expand_path(File.join(File.dirname(__FILE__), "outrider/database.yml" ) ) ))
-     ActiveRecord::Base.establish_connection(db_config)
-     
+    @config       = load_yaml __FILE__, "outrider/config.yml", "Couldn't load config file"
+    @db           = load_database 
   end
+  
   
 
 
 
-
   def set_project_object project
-    project_path = File.expand_path(File.join(File.dirname(__FILE__), "projects/#{project}/auxiliary.rb"))
-
+    project_path = OutriderTools::Store::load_file __FILE__, "projects/#{project}/auxiliary.rb"
     if File.exist? project_path
       require_relative "projects/#{project}/auxiliary"
       # Initialze object for the project we're working on
@@ -47,9 +44,33 @@ class Outrider
       if @project.respond_to?(command)
         @project.send( command, options ) 
       else
-        return "Method doesn't exist"
+        return @config['messages']['no_method']
       end
   end
 
+
+
+
+  private
+
+
+
+
+  def load_yaml file_object, filename, error_message
+    file = OutriderTools::Store::load_file file_object,  filename 
+    if File.exist? file
+       return YAML::load( File.open( file ))
+    else
+       return error_message
+    end
+  end
+
+
+
+
+  def load_database
+       ActiveRecord::Base.establish_connection(@config['database'])
+  end
+  
   
 end

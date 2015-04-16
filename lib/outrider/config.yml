@@ -1,0 +1,10 @@
+database:
+    host:     localhost
+    username: root
+    password: root
+    database: outrider
+    adapter:  mysql2
+
+
+messages:
+    no_method:     "Method doesn't exist"

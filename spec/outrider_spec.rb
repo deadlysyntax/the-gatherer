@@ -62,10 +62,31 @@ describe Outrider do
   
   
   
+  
+  
   it "calls super project method if not in auxiliary file" do
     outrider = Outrider.new
     outrider.set_project_object 'test_project'
     expect( outrider.operate('test_super') ).to eq "Super Test Called"
+  end
+  
+  
+  
+  
+  
+  it "loads config from yaml" do
+    outrider = Outrider.new
+    expect( outrider.config ).not_to be nil
+    expect( outrider.config['messages']['no_method'] ).to eq "Method doesn't exist"
+  end
+  
+  
+  
+  
+  
+  it "loads database connecton" do
+    outrider = Outrider.new
+    expect( outrider.db ).not_to be nil
   end
   
 

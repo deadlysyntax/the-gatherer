@@ -1,5 +1,0 @@
-host:     localhost
-username: root
-password: root
-database: outrider
-adapter:  mysql2

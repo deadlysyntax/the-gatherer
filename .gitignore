@@ -8,3 +8,4 @@
 /spec/reports/
 /tmp/
 /lib/projects/*
+!/lib/projects/test_project
