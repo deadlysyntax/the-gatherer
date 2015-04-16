@@ -1,6 +1,27 @@
 class Project
   
   
+  def set_config name
+    
+    project_meta = Projects.find_by( title: name )
+    
+    @config = {
+      :id     => project_meta.id,
+      :title  => project_meta.title,
+      :domain => project_meta.domain
+    }
+
+  end
+  
+  
+  
+  
+  def project_name name
+    set_config name.to_s
+  end
+  
+  
+  
 
   def not_implemented
     puts "This facade hasn't been implimented by the project"

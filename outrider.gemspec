@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jaap Badlands"]
   spec.email         = ["jaap@deadlysyntax.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Outrider Web Automation Framework provides structure and tools for writing web-automation tasks}
+  spec.description   = %q{Outrider's purpose is to provide an easy-to-use programming interface and organisational structure, to create and run tasks that can automatically visit, interact with and test websites and also that process, clean and store data, and tools for statistical analysis. }
+  spec.homepage      = "https://github.com/deadlysyntax/outrider"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
