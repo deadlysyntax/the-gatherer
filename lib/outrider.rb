@@ -22,7 +22,6 @@ module Outrider
     require "./projects/#{project}/auxiliary"
     # Initialze object for the project we're working on
     @project = project.capitalize.constantize.new
-
   end
 
   

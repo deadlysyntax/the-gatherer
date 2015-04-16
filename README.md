@@ -10,7 +10,7 @@ Outrider's purpose is to provide an easy-to-use programming interface and organi
 
 | Feature | Purpose |
 | ------- | ------- |
-Interacting with websites. | Outrider provides a framework for interacting with CasperJS, which lets you write complex website interactions  - giving you the full power over the DOM with javascript and jQuery to mimic human behaviours such as filling in forms and clicking links. Useful for **testing website front-ends** and  **downloading website contents**.
+Interacting with websites. | Outrider provides a framework for interacting with CasperJS, which lets you write complex website interactions  - giving you the full power over the DOM with nokogiri. Useful for **testing website front-ends** and  **downloading website contents**.
 Data Mining | Outrider provides tools for **collecting**, **cleaning** and **storing data** from the web. 
 Statistical Analysis | Outrider provides libraries for running **statistical algorithms** over datasets.
 	
@@ -28,6 +28,7 @@ Create a new project folder in `lib/projects` and create a file called auxiliary
 Inside it create a class with the same name as your project (but capitalized) and have it inherit from Project.
 
 `
+
 class Site < Project
 	
 	project_name :site
@@ -38,6 +39,7 @@ class Site < Project
 		# Code to crawl site
 	end
 end
+
 `
 
 ### Crawling
