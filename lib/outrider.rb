@@ -1,41 +1,48 @@
-require "./outrider/version"
-require "./outrider/engine"
-require "./outrider/commandify"
-require "./outrider/tools"
-require "./outrider/project"
+#require_relative "outrider/version"
+require_relative "outrider/engine"
+require_relative "outrider/commandify"
+require_relative "outrider/tools"
+require_relative "outrider/project"
 
 
-# Provides an interface to what commands can be run
-module Outrider
+# Provides an interface as to what commands can be run
+class Outrider
   
-
+  attr_reader :command_list, :project
+  
   # When initialized, do so with our base project facade,
   # and change it later once everything else is initialized based on the specified project
-  @project = Project.new
+  def initialize
+    @project      = Project.new
+    
+
+    # TODO clean this shit
+     # Fuck this is ugly
+     db_config = YAML::load( File.open( File.expand_path(File.join(File.dirname(__FILE__), "outrider/database.yml" ) ) ))
+     ActiveRecord::Base.establish_connection(db_config)
+     
+  end
   
-  
-  db_config = YAML::load( File.open( "./outrider/database.yml" ) )
-  ActiveRecord::Base.establish_connection(db_config)
 
 
-  def self.set_project_object project
-    require "./projects/#{project}/auxiliary"
-    # Initialze object for the project we're working on
-    @project = project.capitalize.constantize.new
+  def set_project_object project
+    project_path = File.expand_path(File.join(File.dirname(__FILE__), "projects/#{project}/auxiliary.rb"))
+
+    if File.exist? project_path
+      require_relative "projects/#{project}/auxiliary"
+      # Initialze object for the project we're working on
+      @project = project.classify.constantize.new
+    else
+      return false
+    end
   end
 
-  
 
-  
-  
-  def self.command_list
-    %w(crawl_site)
-  end
 
 
   
-  def self.send command, options
-      if @project.respond_to?(command) && command_list.include?(command.to_s)
+  def operate command, options
+      if @project.respond_to?(command)
         @project.send( command, options ) 
       else
         puts "Method doesn't exist"

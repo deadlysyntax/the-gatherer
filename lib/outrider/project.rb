@@ -1,5 +1,14 @@
 class Project
   
+  attr_reader :config
+  
+  
+  
+  def initialize
+    @config = {}
+  end
+  
+  
   
   def set_config name
     

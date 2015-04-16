@@ -1,11 +1,38 @@
 require 'spec_helper'
+require_relative '../lib/outrider.rb'
 
 describe Outrider do
-  it 'has a version number' do
-    expect(Outrider::VERSION).not_to be nil
-  end
+  
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it "sets up a blank project on initialization" do
+    outrider = Outrider.new
+    expect(outrider.project).not_to be nil
   end
+  
+  
+  it "sets up the right project when asked" do
+    outrider = Outrider.new
+    expect(outrider.project.config).to eq({})
+    outrider.set_project_object 'test_project'
+    expect(outrider.project.config[:id]).to eq(2)
+  end
+  
+  
+  
+  it "sets project config[:domain]" do
+    outrider = Outrider.new
+    outrider.set_project_object 'test_project'
+    expect(outrider.project.config[:domain]).to eq("http://outriderapp.com/scrape_test")
+  end
+  
+  
+  
+  it "cant initialize a project that hasn't been created" do
+    outrider = Outrider.new
+    expect( outrider.set_project_object 'non_existant_project' ).to be false
+  end
+  
+  
+  
+  
 end

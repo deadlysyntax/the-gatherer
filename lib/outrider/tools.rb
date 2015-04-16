@@ -14,22 +14,7 @@ module OutriderTools
   
   module Crawl 
     
-    def self.get_links_at_url url, domain
-      
-      data = Nokogiri::HTML(open(url))
-      
-      raw_links      = data.css('a')
 
-      stripped_links = raw_links.map { |link| 
-        
-        link['href'] 
-      }
-
-      return stripped_links
-    end
-    
-    
-    
     
     
     def self.crawl_site( starting_at, &each_page )

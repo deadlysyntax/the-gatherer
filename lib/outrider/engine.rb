@@ -8,10 +8,11 @@ class Engine
   
   
   def run
+    outrider = Outrider.new
     
-    Outrider::set_project_object( @commands[:options][:project] )
+    outrider.set_project_object( @commands[:options][:project] )
 
-    Outrider::send( @commands[:action], @commands[:options] )
+    outrider.operate( @commands[:action], @commands[:options] )
 
   end
   
