@@ -25,6 +25,8 @@ class Outrider
   
 
 
+
+
   def set_project_object project
     project_path = File.expand_path(File.join(File.dirname(__FILE__), "projects/#{project}/auxiliary.rb"))
 

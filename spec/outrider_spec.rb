@@ -34,5 +34,14 @@ describe Outrider do
   
   
   
+  it "calls methods on the project" do
+    outrider = Outrider.new
+    outrider.set_project_object 'test_project'
+    expect( outrider.operate('test_method_true', {}) ).to be true
+    expect( outrider.operate('test_method_true', {}) ).to be false
+  end
+  
+  
+
   
 end
