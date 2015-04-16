@@ -22,9 +22,27 @@ When working with Outrider, you work within `projects`. Projects are set up by c
 
 In other words, when you crawl a website, you write a method called `crawl_site` which is where you write what you'd like to happen on each page that is crawled (such as retrieving elements through the nokogiri interface and writing it to the database. 
 
+### Projects
 
+#### auxiliary.rb
+Create a new project folder in `lib/projects` and create a file called auxiliary.rb
+
+Inside it create a class with the same name as your project (but capitalized) and have it inherit from Project.
+
+`
+class Site < Project
+	
+	project_name :site
+	
+	# Here is where you can write your callbacks.
+	# All methods in this class must overwrite methods in the interface lib/project which acts as an interface
+	def crawl_site
+		# Code to crawl site
+	end
+end
+`
 
 ### Crawling
 
-Create a new project  folder in `lib/projects` and create a file called 
+
 > ./lib/ignite.rb crawl_site [ [ --project=XXX ] or [  -p XXX ] ]
