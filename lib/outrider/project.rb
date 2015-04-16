@@ -24,6 +24,11 @@ class Project
   
   
   
+  def test_super options
+    return "Super Test Called"
+  end
+  
+  
   
   def project_name name
     set_config name.to_s

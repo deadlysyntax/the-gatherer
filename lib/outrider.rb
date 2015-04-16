@@ -43,11 +43,11 @@ class Outrider
 
 
   
-  def operate command, options
+  def operate command, options = {}
       if @project.respond_to?(command)
         @project.send( command, options ) 
       else
-        puts "Method doesn't exist"
+        return "Method doesn't exist"
       end
   end
 

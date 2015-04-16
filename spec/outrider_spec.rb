@@ -34,13 +34,39 @@ describe Outrider do
   
   
   
-  it "calls methods on the project" do
+  
+  it "calls methods on the project with options" do
     outrider = Outrider.new
     outrider.set_project_object 'test_project'
-    expect( outrider.operate('test_method_true', {}) ).to be true
-    expect( outrider.operate('test_method_true', {}) ).to be false
+    expect( outrider.operate('test_method_true', {:test=>'pass'}) ).to eq({:test=>'pass'})
   end
   
+  
+  
+  
+  it "calls methods on the project without options" do
+    outrider = Outrider.new
+    outrider.set_project_object 'test_project'
+    expect( outrider.operate('test_method_false') ).to be false
+  end
+  
+  
+  
+  
+  
+  it "wont call a project method that doesn't exist" do
+    outrider = Outrider.new
+    outrider.set_project_object 'test_project'
+    expect( outrider.operate('noexistant_method') ).to eq "Method doesn't exist"
+  end
+  
+  
+  
+  it "calls super project method if not in auxiliary file" do
+    outrider = Outrider.new
+    outrider.set_project_object 'test_project'
+    expect( outrider.operate('test_super') ).to eq "Super Test Called"
+  end
   
 
   
