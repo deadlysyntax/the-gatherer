@@ -27,7 +27,7 @@ Create a new project folder in `lib/projects` and create a file called auxiliary
 
 Inside it create a class with the same name as your project (but capitalized) and have it inherit from Project.
 
-`
+```ruby
 
 class Site < Project
 	
@@ -40,7 +40,7 @@ class Site < Project
 	end
 end
 
-`
+```
 
 ### Crawling
 
