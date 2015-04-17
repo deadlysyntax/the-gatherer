@@ -4,7 +4,7 @@ module Commandify
 
   
   def self.process
-    sub_commands = %w(crawl_site create_project delete_project)
+    sub_commands = %w(crawl_site create_project create_project_db_row delete_project)
     global_opts  = Trollop::options do
       banner "CLI for Outrider data processing tools"
       opt :dry_run, "Don't actually do anything", :short => "-n"

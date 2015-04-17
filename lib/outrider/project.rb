@@ -22,16 +22,12 @@ class Project
   
   
   
-  def self.create options
+  def self.create_folder options
     
     class_name   = options[:project].classify
     project_name = options[:project].parameterize.underscore
     file_path    = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}/auxiliary.rb"
-    
-    #create project in database
-    project = Projects.create({ :title => options[:project], :domain => options[:domain] })
-    puts "Project created in database: #{project.id}"
-    
+
     #create project files by making a copy of test_project
     require 'fileutils'
     
@@ -47,10 +43,21 @@ class Project
       file.write(%Q{class #{class_name} < Project\n\tdef initialize\n\t\tproject_name :#{project_name}\n\tend\nend})
       puts "Auxiliary File Created in: #{file.path}"
     }
-    
-    
   end
   
+  
+  
+  
+  
+  def self.create_db_row options
+    #create project in database
+    project = Projects.create({ :title => options[:project], :domain => options[:domain] })
+    puts "Project created in database: #{project.id}"
+  end
+  
+
+
+
   
   
   
@@ -63,7 +70,7 @@ class Project
     
     #delete from database
     project = Projects.find_by( title: options[:project] )
-    project.destroy
+    project.destroy unless project.nil?
     puts "Deleting: project from database: #{options[:project]}"
     
   end
@@ -78,6 +85,8 @@ class Project
   def project_name name
     set_config name.to_s
   end
+  
+  
   
   
 
@@ -107,8 +116,16 @@ class Project
   # /lib/ignite.rb create_project -p project -d domain.com
   #
   def create_project options
-    return Project::create options
+    Project::create_folder options
+    Project::create_db_entry options
   end  
+  
+  
+  
+  
+  def create_project_db_row options
+    Project::create_db_row options
+  end
     
     
     
