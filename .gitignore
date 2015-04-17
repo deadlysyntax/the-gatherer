@@ -9,3 +9,4 @@
 /tmp/
 /lib/projects/*
 !/lib/projects/test_project
+/lib/outrider/config.yml
