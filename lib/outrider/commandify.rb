@@ -13,12 +13,13 @@ module Commandify
 
     command      = ARGV.shift
     command_opts = Trollop::options do
-        opt :domain,   "The domain",                            :short   => "-d",  :type    => String, :default => ''
-        opt :limit,    "Limit",                                 :short   => "-l",  :type    => Integer,:default => 1000
-        opt :project,  "The name of the project",               :short   => "-p",  :type    => String, :default => ''
-        opt :filename, "Write data to a filename",              :short   => "-f",  :type    => String, :default => ''
-        opt :restrict, "Can only be crawled within the domain", :short   => "-r",  :default => true#,
-        #opt :title,    "The title",                             :short   => "-t",  :type    => :default => ''
+        opt :domain,     "The domain",                            :short   => "-d",  :type    => String, :default => ''
+        opt :limit,      "Limit",                                 :short   => "-l",  :type    => Integer,:default => 1000
+        opt :project,    "The name of the project",               :short   => "-p",  :type    => String, :default => ''
+        opt :filename,   "Write data to a filename",              :short   => "-f",  :type    => String, :default => ''
+        opt :restrict,   "Can only be crawled within the domain", :short   => "-r",  :default => true#,
+        #opt :title,     "The title",                             :short   => "-t",  :type    => :default => ''
+        opt :set_project,"If we need to set project",             :short   => "-s",:default => true
       end
 
     

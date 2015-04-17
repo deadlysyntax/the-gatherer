@@ -8,12 +8,13 @@ describe Commandify do
     expect(Commandify.process).to eq({
       :action=>"spec", 
       :options    => {
-        :domain     => "", 
-        :limit      => 1000, 
-        :project    => "", 
-        :filename   => "", 
-        :restrict   => true, 
-        :help       => false
+        :domain      => "", 
+        :limit       => 1000, 
+        :project     => "", 
+        :filename    => "", 
+        :restrict    => true, 
+        :help        => false,
+        :set_project => true
       }
     })
   end

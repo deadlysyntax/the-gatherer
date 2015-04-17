@@ -14,7 +14,8 @@ describe Engine do
         :project    => "", 
         :filename   => "", 
         :restrict   => true, 
-        :help       => false
+        :help       => false,
+        :set_project=> true
       }
     })
   end
@@ -32,11 +33,12 @@ describe Engine do
         :project    => "test_project", 
         :filename   => "", 
         :restrict   => true, 
-        :help       => false
+        :help       => false,
+        :set_project=> true
       }
     }
       
-    expect( engine.run ).to eq({:domain=>"", :limit=>1000, :project=>"test_project", :filename=>"", :restrict=>true, :help=>false})
+    expect( engine.run ).to eq({:domain=>"", :limit=>1000, :project=>"test_project", :filename=>"", :restrict=>true, :help=>false, :set_project => true})
       
   end
   

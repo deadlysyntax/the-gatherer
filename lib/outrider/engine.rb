@@ -9,7 +9,7 @@ class Engine
   
   def run
     outrider = Outrider.new
-    outrider.set_project_object( @commands[:options][:project] )
+    outrider.set_project_object( @commands[:options][:project] ) if @commands[:options][:set_project] == true
     outrider.operate( @commands[:action], @commands[:options] )
   end
   

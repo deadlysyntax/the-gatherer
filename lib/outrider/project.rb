@@ -5,14 +5,14 @@ class Project
   
   
   def initialize
-    
+    @config = {}
   end
   
   
   
   def set_config name
     project_meta = Projects.find_by( title: name )
-    @config = {}
+    
     @config = {
       :id     => project_meta.id,
       :title  => project_meta.title,
