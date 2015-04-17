@@ -20,7 +20,6 @@ describe Project do
   
   
   it "deletes a project from filesystem and database" do
-    
     Project::create({ :domain => 'http://temporary.com', :project => 'temporary' })
     Project::delete({ :project => 'temporary' })
     expect( Projects.find_by( title: 'temporary' ) ).to be nil

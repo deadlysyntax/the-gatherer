@@ -22,7 +22,7 @@ class Project
   
   
   
-  def create options
+  def self.create options
     
     class_name   = options[:project].classify
     project_name = options[:project].parameterize.underscore
@@ -54,7 +54,7 @@ class Project
   
   
   
-  def delete options
+  def self.delete options
     
     #delete folder
     folder_path  = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}"
@@ -107,13 +107,13 @@ class Project
   # /lib/ignite.rb create_project -p project -d domain.com
   #
   def create_project options
-    return create options
+    return Project::create options
   end  
     
     
     
    def delete_project options 
-    return delete options
+    return Project::delete options
   end
 
 
