@@ -16,9 +16,12 @@ class Outrider
   # When initialized, do so with our base project facade,
   # and change it later once everything else is initialized based on the specified project
   def initialize
-    @project      = Project.new
-    @config       = load_yaml __FILE__, "outrider/config.yml", "Couldn't load config file"
-    @db           = load_database 
+    @project           = Project.new
+    @config = {
+      :database => load_yaml( __FILE__, "outrider/config_db.yml",   "Couldn't load database config file"),
+      :messages => load_yaml( __FILE__, "outrider/config_msg.yml",  "Couldn't load messages config file")
+    }
+    @db                = load_database 
   end
   
   
@@ -44,7 +47,7 @@ class Outrider
       if @project.respond_to?(command)
         return @project.send( command, options ) 
       else
-        return @config['messages']['no_method']
+        return @config[:messages]["no_method"]
       end
   end
 
@@ -69,7 +72,7 @@ class Outrider
 
 
   def load_database
-       ActiveRecord::Base.establish_connection(@config['database'])
+       ActiveRecord::Base.establish_connection(@config[:database])
   end
   
   

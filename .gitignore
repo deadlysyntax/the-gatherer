@@ -8,5 +8,5 @@
 /spec/reports/
 /tmp/
 /lib/projects/*
-!/lib/projects/test_project
-/lib/outrider/config.yml
+!/lib/projects/
+/lib/outrider/config_db.yml

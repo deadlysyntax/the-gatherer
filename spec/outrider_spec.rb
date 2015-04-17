@@ -77,7 +77,7 @@ describe Outrider do
   it "loads config from yaml" do
     outrider = Outrider.new
     expect( outrider.config ).not_to be nil
-    expect( outrider.config['messages']['no_method'] ).to eq "Method doesn't exist"
+    expect( outrider.config[:messages]['no_method'] ).to eq "Method doesn't exist"
   end
   
   
