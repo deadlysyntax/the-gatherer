@@ -21,7 +21,7 @@ describe Project do
   
   it "deletes a project from filesystem and database" do
     Project::create_folder({ :domain => 'http://temporary.com', :project => 'temporary' })
-    Project::create_db_entry({ :domain => 'http://temporary.com', :project => 'temporary' })
+    Project::create_db_row({ :domain => 'http://temporary.com', :project => 'temporary' })
     Project::delete({ :project => 'temporary' })
     expect( Projects.find_by( title: 'temporary' ) ).to be nil
     expect( File ).not_to exist('../lib/outrider/projects/temporary/auxiliary.rb')
@@ -40,7 +40,7 @@ describe Project do
   
   
   it "sets up a new project in the database" do
-    Project::create_db_entry({ :domain => 'http://temporary.com', :project => 'temporary' })
+    Project::create_db_row({ :domain => 'http://temporary.com', :project => 'temporary' })
     expect( Projects.find_by( title: 'temporary' ) ).to be_a Projects 
     Project::delete({ :project => 'temporary' })
   end
