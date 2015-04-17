@@ -1,6 +1,6 @@
 class Engine
   
-  attr_reader :commands, :messages
+  attr_accessor :commands
 
   def initialize
     @commands = Commandify::process

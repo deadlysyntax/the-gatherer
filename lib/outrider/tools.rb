@@ -17,19 +17,22 @@ module OutriderTools
 
     
     
-    def self.crawl_site( starting_at, &each_page )
+    def self.crawl_site( starting_at, limit = -1, &each_page )
       # 
       files = OutriderTools::Clean::file_types
       # 
       starting_uri  = URI.parse( starting_at )    #
       seen_pages    = Set.new                     # Keep track of what we've seen
-
+      counter       = 0
+      
       crawl_page = ->(page_uri) do              # A re-usable mini-function
         
-        unless seen_pages.include?(page_uri)
+        unless seen_pages.include?(page_uri) && limit == -1 || counter >= limit
           seen_pages << page_uri                # Record that we've seen this
           begin
-
+            
+            counter+=1
+            
             # Get the page
             doc = Nokogiri.HTML( open(page_uri) ) 
             
@@ -43,14 +46,18 @@ module OutriderTools
 
             # Recursively crawl the child URIs
             uris.each{ |uri| crawl_page.call(uri) }
+            
 
           rescue OpenURI::HTTPError # Guard against 404s
             warn "Skipping invalid link #{page_uri}"
-          rescue ArgumentError
+          rescue ArgumentError => e
             warn "Skipping page that causes open-uri argument error"
+          rescue RuntimeError => e
+            warn "Invalid Redirection"
           end
         end
       end
+      
       crawl_page.call( starting_uri )   # Kick it all off!
     end
     
@@ -96,13 +103,20 @@ module OutriderTools
     
     
     
+    
+    
+    
     def self.file_types sub = 'all' 
       
       case sub
       when "all" 
-        return %w[png jpeg jpg gif svg txt js css zip gz]
+        return %w[png jpeg jpg gif svg txt js css zip gz pdf]
+      when "images"
+        return %w[png jpeg jpg gif svg]
+      when "pdfs"
+        return %w[pdf]
       else
-        return %w[png jpeg jpg gif svg txt js css zip gz]
+        return %w[png jpeg jpg gif svg txt js css zip gz pdf]
       end
       
     end
