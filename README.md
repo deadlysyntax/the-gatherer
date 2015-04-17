@@ -24,7 +24,7 @@ To create a full project (including folders and db), call create project and pas
 > ./lib/ignite.rb create_project -p project -d domain.com
 
 To create just the database entry
-> ./lib/ignite.rb create_project_db_entry -p project -d domain.com
+> ./lib/ignite.rb create_project_db_row -p project -d domain.com
 
 To delete a project 
 > /lib/ignite.rb delete_project -p project
