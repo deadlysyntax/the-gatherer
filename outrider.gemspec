@@ -5,7 +5,7 @@ require 'outrider/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "outrider"
-  spec.version       = Outrider::VERSION
+  spec.version       = "0.0.1"
   spec.authors       = ["Jaap Badlands"]
   spec.email         = ["jaap@deadlysyntax.com"]
 
