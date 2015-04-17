@@ -1,4 +1,4 @@
-#!ruby
+#!/usr/lib/ruby
 
 # Outrider loads in everything we need
 require_relative './outrider.rb'
