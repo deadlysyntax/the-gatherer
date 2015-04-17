@@ -22,6 +22,54 @@ class Project
   
   
   
+  def create options
+    
+    class_name   = options[:project].classify
+    project_name = options[:project].parameterize.underscore
+    file_path    = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}/auxiliary.rb"
+    
+    #create project in database
+    project = Projects.create({ :title => options[:project], :domain => options[:domain] })
+    puts "Project created in database: #{project.id}"
+    
+    #create project files by making a copy of test_project
+    require 'fileutils'
+    
+    #create directories if they dont exist
+    dirname = File.dirname(file_path)
+    unless File.directory?(dirname)
+      FileUtils.mkdir_p(dirname)
+      puts "Making directory: #{dirname}"
+    end
+    
+    #generate our default project class
+    File.open( file_path, 'w') { |file| 
+      file.write(%Q{class #{class_name} < Project\n\tdef initialize\n\t\tproject_name :#{project_name}\n\tend\nend})
+      puts "Auxiliary File Created in: #{file.path}"
+    }
+    
+    
+  end
+  
+  
+  
+  
+  def delete options
+    
+    #delete folder
+    folder_path  = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}"
+    FileUtils.rm_rf( folder_path )
+    puts "Deleting: #{folder_path}"
+    
+    #delete from database
+    project = Projects.find_by( title: options[:project] )
+    project.destroy
+    puts "Deleting: project from database: #{options[:project]}"
+    
+  end
+  
+  
+  
   #
   # These methods are here simply to help run our unit tests
   def test_super options
@@ -54,7 +102,19 @@ class Project
   end
   
   
-
+  
+  # A command line tool that lets us build a project
+  # /lib/ignite.rb create_project -p project -d domain.com
+  #
+  def create_project options
+    return create options
+  end  
+    
+    
+    
+   def delete_project options 
+    return delete options
+  end
 
 
 

@@ -29,7 +29,7 @@ class Outrider
 
 
   def set_project_object project
-    project_path = OutriderTools::Store::load_file __FILE__, "projects/#{project}/auxiliary.rb"
+    project_path = OutriderTools::Store::get_filepath __FILE__, "projects/#{project}/auxiliary.rb"
     if File.exist? project_path
       require_relative "projects/#{project}/auxiliary"
       # Initialze object for the project we're working on
@@ -60,7 +60,7 @@ class Outrider
 
 
   def load_yaml file_object, filename, error_message
-    file = OutriderTools::Store::load_file file_object,  filename 
+    file = OutriderTools::Store::get_filepath file_object,  filename 
     if File.exist? file
        return YAML::load( File.open( file ))
     else

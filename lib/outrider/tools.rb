@@ -130,28 +130,28 @@ module OutriderTools
   module Store
     
     
-    def self.write_data project, filename, data, format
+    #def self.write_data project, filename, data, format
       
       # TODO change this to a different folder
-      dirname = File.dirname(__FILE__) + "/data/#{project}"
+     # dirname = File.dirname(__FILE__) + "/data/#{project}"
 
-      unless File.directory?(dirname)
-        FileUtils.mkdir_p(dirname)
-      end
+     # unless File.directory?(dirname)
+     #   FileUtils.mkdir_p(dirname)
+     # end
 
-      File.open( dirname + '/' + filename + '.data', 'w+') { |file| 
-        file.write( YAML::dump(data) ) 
-      }
-    end
+    #  File.open( dirname + '/' + filename + '.data', 'w+') { |file| 
+    #    file.write( YAML::dump(data) ) 
+    #  }
+    #end
 
 
 
-    def self.read_data project, filename, format
-       YAML::load( File.read( File.dirname(__FILE__) + "/data/#{project}/#{filename}") )
-    end
+    #def self.read_data project, filename, format
+     #  YAML::load( File.read( File.dirname(__FILE__) + "/data/#{project}/#{filename}") )
+    #end
     
     
-    def self.load_file base, filename
+    def self.get_filepath base, filename
       File.expand_path(File.join(File.dirname(base), filename ))
     end
     

@@ -20,6 +20,11 @@ When working with Outrider, you work within `projects`. Projects are set up by c
 In other words, when you crawl a website, you write a method called `crawl_site` which is where you write what you'd like to happen on each page that is crawled (such as retrieving elements through the nokogiri interface and writing it to the database. 
 
 ### Projects
+To create a project, call create project and pass a project name, title and domain
+> ./lib/ignite.rb create_project -p project -d domain.com
+
+To delete a project 
+> /lib/ignite.rb delete_project -p project
 
 #### auxiliary.rb
 Create a new project folder in `lib/projects` and create a file called auxiliary.rb
