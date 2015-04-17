@@ -7,6 +7,6 @@
 /pkg/
 /spec/reports/
 /tmp/
-/lib/projects/*
-!/lib/projects/
+#/lib/projects/*
+#!/lib/projects/
 /lib/outrider/config_db.yml
