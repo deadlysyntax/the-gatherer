@@ -1,0 +1,13 @@
+# Logfile created on 2015-04-17 21:52:08 +1000 by logger.rb/41954
+I, [2015-04-17T21:52:08.445247 #6268]  INFO -- : . http://www.nzherald.co.nz
+I, [2015-04-17T21:52:10.818812 #6268]  INFO -- : . http://www.nzherald.co.nz/
+I, [2015-04-17T21:52:13.392017 #6268]  INFO -- : . http://www.nzherald.co.nz/nz/news/headlines.cfm?c_id=1
+I, [2015-04-17T21:52:16.013645 #6268]  INFO -- : . http://www.nzherald.co.nz/new-zealand/weather/forecasts.cfm?c_id=10
+I, [2015-04-17T21:52:17.503953 #6268]  INFO -- : . http://www.nzherald.co.nz/crime/news/headlines.cfm?c_id=30
+I, [2015-04-17T21:52:20.015390 #6268]  INFO -- : . http://www.nzherald.co.nz/weather/news/headlines.cfm?c_id=10
+I, [2015-04-17T21:52:24.167053 #6268]  INFO -- : . http://www.nzherald.co.nz/politics/news/headlines.cfm?c_id=280
+I, [2015-04-17T21:52:28.801112 #6268]  INFO -- : . http://www.nzherald.co.nz/element-magazine/news/headlines.cfm?c_id=1503340
+I, [2015-04-17T21:52:30.226080 #6268]  INFO -- : . http://www.nzherald.co.nz/your-views/news/headlines.cfm?c_id=1501154
+I, [2015-04-17T21:59:56.434242 #6275]  INFO -- : Error 
+I, [2015-04-17T21:59:56.434388 #6275]  INFO -- : Error 
+I, [2015-04-17T21:59:56.434436 #6275]  INFO -- : Error 

@@ -1,6 +1,6 @@
 class Project
   
-  attr_reader :config
+  attr_reader :config, :logger
   
   
   
@@ -23,7 +23,6 @@ class Project
   
   
   def self.create_folder options
-    
     class_name   = options[:project].classify
     project_name = options[:project].parameterize.underscore
     file_path    = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}/auxiliary.rb"
@@ -62,7 +61,6 @@ class Project
   
   
   def self.delete options
-    
     #delete folder
     folder_path  = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}"
     FileUtils.rm_rf( folder_path )
@@ -72,7 +70,6 @@ class Project
     project = Projects.find_by( title: options[:project] )
     project.destroy unless project.nil?
     puts "Deleting: project from database: #{options[:project]}"
-    
   end
   
   
@@ -117,7 +114,7 @@ class Project
   #
   def create_project options
     Project::create_folder options
-    Project::create_db_entry options
+    Project::create_db_row options
   end  
   
   

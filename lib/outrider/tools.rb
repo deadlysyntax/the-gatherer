@@ -7,6 +7,7 @@ require 'uri'
 require 'set'
 require 'json'
 require 'yaml'
+require 'logger'
 
 
 module OutriderTools
@@ -15,8 +16,6 @@ module OutriderTools
   module Crawl 
     
 
-    
-    
     def self.crawl_site( starting_at, limit = -1, &each_page )
       # 
       files = OutriderTools::Clean::file_types
@@ -24,10 +23,12 @@ module OutriderTools
       starting_uri  = URI.parse( starting_at )    #
       seen_pages    = Set.new                     # Keep track of what we've seen
       counter       = 0
+      @log          = Logger.new('logfile.log', 'daily')
       
+
       crawl_page = ->(page_uri) do              # A re-usable mini-function
         
-        unless seen_pages.include?(page_uri) && limit == -1 || counter >= limit
+        unless seen_pages.include?(page_uri) && ( limit == -1 || counter >= limit )
           seen_pages << page_uri                # Record that we've seen this
           begin
             
@@ -37,7 +38,7 @@ module OutriderTools
             doc = Nokogiri.HTML( open(page_uri) ) 
             
             # Yield page and URI to the block passed in 
-            each_page.call( doc, page_uri )        
+            each_page.call( doc, page_uri)        
 
             # Find all the links on the page
             hrefs = doc.css('a[href]').map{ |a| a['href'] }
@@ -54,6 +55,9 @@ module OutriderTools
             warn "Skipping page that causes open-uri argument error"
           rescue RuntimeError => e
             warn "Invalid Redirection"
+          rescue Exception => e
+            @log.info "Error #{e}"
+            raise e
           end
         end
       end
@@ -90,7 +94,7 @@ module OutriderTools
       # Throw out links to files (this could be more efficient with regex)
       uris.reject!{ |uri| files.any?{ |ext| uri.path.end_with?(".#{ext}") } }
       
-      # Throw out links to files (this could be more efficient with regex)
+      # Throw out duplicates
       uris.reject!{ |uri| ProjectData.exists?( url: uri.to_s) }
 
       # Remove #foo fragments so that sub-page links aren't differentiated
