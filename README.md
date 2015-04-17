@@ -2,15 +2,14 @@
 
 ### Introduction
 
-**Outrider Web Automation Framework provides structure and tools for writing web-automation tasks** 
+**Outrider Data Framework provides structure and tools for collecting, cleaning, storing and analysing data from around the web** 
 
-Outrider's purpose is to provide an easy-to-use programming interface and organisational structure, to create and run tasks that can automatically visit, interact with and test websites and also that process, clean and store data, and tools for statistical analysis. 
+Outrider's purpose is to provide an easy-to-use programming interface and organisational structure, to create and run tasks that can programmatically visit and collect data sources, interact with and test websites, and also process, clean and store data. Additionally Outrider provides tools for statistical analysis. 
 
 ### Features
 
 | Feature | Purpose |
 | ------- | ------- |
-Interacting with websites. | Outrider provides a framework for interacting with CasperJS, which lets you write complex website interactions  - giving you the full power over the DOM with nokogiri. Useful for **testing website front-ends** and  **downloading website contents**.
 Data Mining | Outrider provides tools for **collecting**, **cleaning** and **storing data** from the web. 
 Statistical Analysis | Outrider provides libraries for running **statistical algorithms** over datasets.
 	

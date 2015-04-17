@@ -25,14 +25,16 @@ module OutriderTools
       seen_pages    = Set.new                     # Keep track of what we've seen
 
       crawl_page = ->(page_uri) do              # A re-usable mini-function
+        
         unless seen_pages.include?(page_uri)
           seen_pages << page_uri                # Record that we've seen this
           begin
+
             # Get the page
-            doc = Nokogiri.HTML( open( page_uri)) 
+            doc = Nokogiri.HTML( open(page_uri) ) 
             
             # Yield page and URI to the block passed in 
-            each_page.call(doc,page_uri)        
+            each_page.call( doc, page_uri )        
 
             # Find all the links on the page
             hrefs = doc.css('a[href]').map{ |a| a['href'] }
@@ -44,10 +46,9 @@ module OutriderTools
 
           rescue OpenURI::HTTPError # Guard against 404s
             warn "Skipping invalid link #{page_uri}"
-          rescue OpenURI::ArgumentError
+          rescue ArgumentError
             warn "Skipping page that causes open-uri argument error"
           end
-          
         end
       end
       crawl_page.call( starting_uri )   # Kick it all off!
