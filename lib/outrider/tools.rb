@@ -8,6 +8,7 @@ require 'set'
 require 'json'
 require 'yaml'
 require 'logger'
+require 'time'
 
 
 module OutriderTools
@@ -67,9 +68,10 @@ module OutriderTools
     
   end
   
-  
-  
   module Scrape
+     
+     
+     
      
      
      def self.page( url, domain, operate )
@@ -88,13 +90,13 @@ module OutriderTools
          return data, clean_uris
          
        rescue OpenURI::HTTPError # Guard against 404s
-         warn "Skipping invalid link #{page_uri}"
+         @log.error "Skipping invalid link #{page_uri}"
        rescue ArgumentError => e
-         warn "Skipping page that causes argument error: #{e}"
+         @log.error "Skipping page that causes argument error: #{e}"
        rescue RuntimeError => e
-         warn "Invalid Redirection: #{e}"
+         @log.error "Invalid Redirection: #{e}"
        rescue Exception => e
-         @log.info "Error #{e}"
+         @log.error "Error #{e}"
          raise e
        end
        

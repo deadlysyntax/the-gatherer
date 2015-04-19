@@ -10,4 +10,5 @@ logfile.log
 /tmp/
 #/lib/projects/*
 #!/lib/projects/
+*.log
 /lib/outrider/config_db.yml
