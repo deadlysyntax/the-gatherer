@@ -54,6 +54,7 @@ module OutriderTools
         end
 
         @log.info "Saving page data for url #{working_page.url}"
+        @log.error data
         working_page.update( data ) unless data.nil?
 
         recurse.call
