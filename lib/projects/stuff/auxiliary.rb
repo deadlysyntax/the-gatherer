@@ -13,8 +13,8 @@ class Stuff < Project
   def crawl options
     OutriderTools::Crawl::site( @config, ->(page, uri){
       unless( page.css('.story_landing').text.strip.empty? )
-        p page.css('.story_landing .story__dateline span')
-        unless page.css('.story_landing .story__dateline span').nil?
+        #p page.css('.story_landing .story__dateline span').empty?
+        unless page.css('.story_landing .story__dateline span').empty?
           clean_date = DateTime.strptime( page.css('.story_landing .story__dateline span')[0]["content"], '%a %b %d %H:%M:%S %Z %Y').to_s 
         else
           clean_date = NULL
