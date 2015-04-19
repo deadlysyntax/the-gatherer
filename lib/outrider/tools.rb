@@ -26,12 +26,12 @@ module OutriderTools
       recurse = ->() do
         #
         # Pick a from the database to crawl
-        unless ProjectData.exists?( status: 'unscraped' )
+        unless ProjectData.where( status: 'unscraped', project_id: project[:id] ).exists?
           @log.info "No pages to scrape"
           return
         end  
 
-        working_page = ProjectData.where( status: 'unscraped').first
+        working_page = ProjectData.where( status: 'unscraped', project_id: project[:id]).first
         @log.info "Scraping #{working_page.url}"
         #
         #   Scape it
@@ -54,7 +54,6 @@ module OutriderTools
         end
 
         @log.info "Saving page data for url #{working_page.url}"
-        @log.error data
         working_page.update( data ) unless data.nil?
 
         recurse.call
