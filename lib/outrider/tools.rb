@@ -16,58 +16,6 @@ module OutriderTools
   module Crawl 
     
 
-    def self.crawl_site( starting_at, limit = -1, &each_page )
-      # 
-      files = OutriderTools::Clean::file_types
-      # 
-      starting_uri  = URI.parse( starting_at )    #
-      seen_pages    = Set.new                     # Keep track of what we've seen
-      counter       = 0
-      @log          = Logger.new('logfile.log', 'daily')
-      
-
-      crawl_page = ->(page_uri) do              # A re-usable mini-function
-        
-        unless seen_pages.include?(page_uri.to_s) && ( limit == -1 || counter >= limit )
-          seen_pages << page_uri.to_s       # Record that we've seen this
-          begin
-            
-            counter+=1
-            
-            # Get the page
-            doc = Nokogiri.HTML( open(page_uri) ) 
-            
-            # Yield page and URI to the block passed in 
-            each_page.call( doc, page_uri)        
-
-            # Find all the links on the page
-            hrefs = doc.css('a[href]').map{ |a| a['href'] }
-
-            uris  = OutriderTools::Clean::tidy_urls( hrefs, page_uri, starting_uri, files )
-
-            # Recursively crawl the child URIs
-            uris.each{ |uri| crawl_page.call(uri) }
-            
-
-          rescue OpenURI::HTTPError # Guard against 404s
-            warn "Skipping invalid link #{page_uri}"
-          rescue ArgumentError => e
-            warn "Skipping page that causes open-uri argument error"
-          rescue RuntimeError => e
-            warn "Invalid Redirection"
-          rescue Exception => e
-            @log.info "Error #{e}"
-            raise e
-          end
-        end
-      end
-      
-      crawl_page.call( starting_uri )   # Kick it all off!
-    end
-    
-    
-    
-    
     
     
     def self.site project, operate
