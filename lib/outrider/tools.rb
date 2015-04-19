@@ -67,11 +67,57 @@ module OutriderTools
     
     
     
+    
+    
+    
+    def crawl
+      
+      
+    end
+
+    
+    
+    
   end
   
   
   
   module Scrape
+     
+     
+     def self.page( url, domain, &operate )
+       @log          = Logger.new('logfile.log', 'daily')
+       begin
+         page_uri = URI.parse( url )
+         doc      = Nokogiri.HTML( open(page_uri) ) 
+         
+         p page_uri
+         p doc
+         
+         # Yield page and URI to the block passed in 
+         data  = operate.call( doc, page_uri )        
+
+         # Find all the links on the page
+         hrefs = doc.css('a[href]').map{ |a| a['href'] }
+
+         clean_uris  = OutriderTools::Clean::tidy_urls( hrefs, page_uri, domain, files )
+
+         # Recursively crawl the child URIs
+         #clean_uris.each |uri| { each_link.call(uri) }
+         return data, clean_uris
+         
+       rescue OpenURI::HTTPError # Guard against 404s
+         warn "Skipping invalid link #{page_uri}"
+       rescue ArgumentError => e
+         warn "Skipping page that causes argument error"
+       rescue RuntimeError => e
+         warn "Invalid Redirection"
+       rescue Exception => e
+         @log.info "Error #{e}"
+         raise e
+       end
+     
+     end
      
   end
   
@@ -83,13 +129,13 @@ module OutriderTools
     
     
     
-    def self.tidy_urls hrefs, page_uri, starting_uri, files 
+    def self.tidy_urls hrefs, page_uri, domain, files 
       
       # Make these URIs, throwing out problem ones like mailto:
       uris = hrefs.map{ |href| URI.join( page_uri, href ) rescue nil }.compact
 
       # Pare it down to only those pages that are on the same site
-      uris.select!{ |uri| uri.host == starting_uri.host }
+      uris.select!{ |uri| uri.host == domain.host }
 
       # Throw out links to files (this could be more efficient with regex)
       uris.reject!{ |uri| files.any?{ |ext| uri.path.end_with?(".#{ext}") } }
