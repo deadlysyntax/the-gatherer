@@ -51,5 +51,8 @@ end
 
 ### Crawling
 
+Specify project and lets us take over
+> ./lib/ignite.rb pick_crawl_scrape -p XXX
 
+Deprecated Command
 > ./lib/ignite.rb crawl_site [ [ --project=XXX ] or [  -p XXX ] ]

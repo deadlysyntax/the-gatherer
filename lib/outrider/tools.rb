@@ -70,8 +70,47 @@ module OutriderTools
     
     
     
-    def crawl
+    def self.site project, operate
       
+      @log = Logger.new(STDOUT)
+      
+      recurse = ->() do
+        #
+        # Pick a from the database to crawl
+        unless ProjectData.exists?( status: 'unscraped' )
+          @log.info "No pages to scrape"
+          return
+        end  
+
+        working_page = ProjectData.where( status: 'unscraped').first
+        @log.info "Scraping #{working_page.url}"
+        #
+        #   Scape it
+        data, links = OutriderTools::Scrape::page( working_page.url, project[:domain], operate)
+
+        unless links.nil? 
+          links.each  do |link|
+            # Check if link already exists
+            if ProjectData.find_by(url: link.to_s).nil?
+              ProjectData.create({
+                :url        => link.to_s,
+                :status     => 'unscraped',
+                :project_id => project[:id]
+              })
+              @log.info "Adding new url to database: #{link.to_s}"
+            else
+              @log.info "URL already exists in database: #{link.to_s}"
+            end
+          end
+        end
+
+        @log.info "Saving page data for url #{working_page.url}"
+        working_page.update( data ) unless data.nil?
+
+        recurse.call
+      end
+
+      recurse.call
       
     end
 
@@ -85,38 +124,34 @@ module OutriderTools
   module Scrape
      
      
-     def self.page( url, domain, &operate )
-       @log          = Logger.new('logfile.log', 'daily')
+     def self.page( url, domain, operate )
+       @log      = Logger.new('logfile.log', 'daily')
+       files     = OutriderTools::Clean::file_types
        begin
          page_uri = URI.parse( url )
          doc      = Nokogiri.HTML( open(page_uri) ) 
-         
-         p page_uri
-         p doc
-         
          # Yield page and URI to the block passed in 
-         data  = operate.call( doc, page_uri )        
+         data  = operate.( doc, page_uri )        
 
          # Find all the links on the page
          hrefs = doc.css('a[href]').map{ |a| a['href'] }
 
-         clean_uris  = OutriderTools::Clean::tidy_urls( hrefs, page_uri, domain, files )
-
-         # Recursively crawl the child URIs
-         #clean_uris.each |uri| { each_link.call(uri) }
+         clean_uris  = OutriderTools::Clean::tidy_urls( hrefs, page_uri, page_uri, files )
          return data, clean_uris
          
        rescue OpenURI::HTTPError # Guard against 404s
          warn "Skipping invalid link #{page_uri}"
        rescue ArgumentError => e
-         warn "Skipping page that causes argument error"
+         warn "Skipping page that causes argument error: #{e}"
        rescue RuntimeError => e
-         warn "Invalid Redirection"
+         warn "Invalid Redirection: #{e}"
        rescue Exception => e
          @log.info "Error #{e}"
          raise e
        end
-     
+       
+       return { :status => 'rejected' }
+       
      end
      
   end
@@ -178,28 +213,6 @@ module OutriderTools
   
   
   module Store
-    
-    
-    #def self.write_data project, filename, data, format
-      
-      # TODO change this to a different folder
-     # dirname = File.dirname(__FILE__) + "/data/#{project}"
-
-     # unless File.directory?(dirname)
-     #   FileUtils.mkdir_p(dirname)
-     # end
-
-    #  File.open( dirname + '/' + filename + '.data', 'w+') { |file| 
-    #    file.write( YAML::dump(data) ) 
-    #  }
-    #end
-
-
-
-    #def self.read_data project, filename, format
-     #  YAML::load( File.read( File.dirname(__FILE__) + "/data/#{project}/#{filename}") )
-    #end
-    
     
     def self.get_filepath base, filename
       File.expand_path(File.join(File.dirname(base), filename ))
