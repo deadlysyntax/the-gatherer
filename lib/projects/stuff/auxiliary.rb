@@ -13,9 +13,8 @@ class Stuff < Project
   def crawl options
     OutriderTools::Crawl::site( @config, ->(page, uri){
       unless( page.css('.story_landing').text.strip.empty? )
-        return { :status => 'rejected' } if page.css('.story_landing .story__dateline span').nil?
-          
-       clean_date = DateTime.strptime( page.css('.story_landing .story__dateline span')[0]["content"], '%a %b %d %H:%M:%S %Z %Y').to_s
+
+        clean_date = DateTime.strptime( page.css('.story_landing .story__dateline span')[0]["content"], '%a %b %d %H:%M:%S %Z %Y').to_s unless page.css('.story_landing .story__dateline span').nil?
         return {
           :url                      => uri.to_s,
           :title_raw                => page.css('.story_content_top h1').text.strip,
@@ -27,7 +26,7 @@ class Stuff < Project
         }
       else
         return {
-          :status              => 'rejected'
+          :status  => 'rejected'
         }
       end
     })
