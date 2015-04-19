@@ -14,7 +14,12 @@ class Stuff < Project
     OutriderTools::Crawl::site( @config, ->(page, uri){
       unless( page.css('.story_landing').text.strip.empty? )
 
-        clean_date = DateTime.strptime( page.css('.story_landing .story__dateline span')[0]["content"], '%a %b %d %H:%M:%S %Z %Y').to_s unless page.css('.story_landing .story__dateline span').nil?
+        unless page.css('.story_landing .story__dateline span').nil?
+          clean_date = DateTime.strptime( page.css('.story_landing .story__dateline span')[0]["content"], '%a %b %d %H:%M:%S %Z %Y').to_s 
+        else
+          clean_date = NULL
+        end
+        
         return {
           :url                      => uri.to_s,
           :title_raw                => page.css('.story_content_top h1').text.strip,
