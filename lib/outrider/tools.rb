@@ -76,7 +76,7 @@ module OutriderTools
      
      
      def self.page( url, domain, operate )
-       @log      = Logger.new('logfile.log', 'daily')
+       @log      = Logger.new('log/logfile.log', 'daily')
        files     = OutriderTools::Clean::file_types
        begin
          page_uri = URI.parse( url )
