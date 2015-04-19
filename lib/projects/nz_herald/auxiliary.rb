@@ -13,7 +13,7 @@ class NzHerald < Project
   def crawl_site options
     
 
-    OutriderTools::Crawl::crawl_site(@config[:domain]) do | page, uri |
+    OutriderTools::Crawl::crawl_site(@config[:domain], 1000) do | page, uri |
 
       if( ! page.css('.articleTitle').text.strip.empty? )
 
