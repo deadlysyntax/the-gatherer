@@ -17,7 +17,7 @@ class Stuff < Project
         unless page.css('.story_landing .story__dateline span').empty?
           clean_date = DateTime.strptime( page.css('.story_landing .story__dateline span')[0]["content"], '%a %b %d %H:%M:%S %Z %Y').to_s 
         else
-          clean_date = ''
+          return
         end
         
         return {
