@@ -6,6 +6,7 @@
 /doc/
 /pkg/
 /spec/reports/
+logfile.log
 /tmp/
 #/lib/projects/*
 #!/lib/projects/
