@@ -73,7 +73,7 @@ class NzHerald < Project
       #page.update( data )
       @log.info "*** Page Hit"
       @log.info working_page.url
-      @log.info data
+      #@log.info data
       @log.info links
     
       #links.each |link| do
