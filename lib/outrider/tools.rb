@@ -28,7 +28,7 @@ module OutriderTools
 
       crawl_page = ->(page_uri) do              # A re-usable mini-function
         
-        unless seen_pages.include?(page_uri) && ( limit == -1 || counter >= limit )
+        unless seen_pages.include?(page_uri.to_s) && ( limit == -1 || counter >= limit )
           seen_pages << page_uri.to_s       # Record that we've seen this
           begin
             
