@@ -7,8 +7,10 @@
 /pkg/
 /spec/reports/
 /config/*
+!/config/msg.yml
 logfile.log
 /tmp/
+
 #/lib/projects/*
 #!/lib/projects/
 *.log
