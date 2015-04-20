@@ -12,7 +12,6 @@ gem 'activerecord',            '~> 4.2.1'
 gem 'mysql2',                  '~> 0.3.18'
 gem 'rspec',                   '~> 3.2.0'
 gem 'capistrano',              '~> 3.4.0'
+gem 'rvm1-capistrano3',        '~> 1.3.2.2'
+gem 'capistrano-bundler',      '~> 1.1.4'
 
-group :development do
-  gem 'capistrano-ssh-doctor', '~> 1.0'
-end
