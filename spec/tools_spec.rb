@@ -6,19 +6,7 @@ describe OutriderTools do
 
   
   
-  
 
-
-  it "crawls a domain looking for links" do
-    
-    
-    
-  end
-  
-  
-  it "cleans urls" do
-    
-  end
 
   
 end

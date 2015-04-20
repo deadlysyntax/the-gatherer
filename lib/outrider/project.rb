@@ -2,7 +2,7 @@ class Project
   
   attr_reader :config, :logger
   
-  
+  @@log    = Logger.new('log/projects.log')
   
   def initialize
     @config = {}
@@ -12,7 +12,6 @@ class Project
   
   def set_config name
     project_meta = Projects.find_by( title: name )
-    
     @config = {
       :id     => project_meta.id,
       :title  => project_meta.title,
@@ -24,6 +23,7 @@ class Project
   
   
   def self.create_folder options
+    
     class_name   = options[:project].classify
     project_name = options[:project].parameterize.underscore
     file_path    = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}/auxiliary.rb"
@@ -35,13 +35,13 @@ class Project
     dirname = File.dirname(file_path)
     unless File.directory?(dirname)
       FileUtils.mkdir_p(dirname)
-      puts "Making directory: #{dirname}"
+      @@log.info "Making directory: #{dirname}"
     end
     
     #generate our default project class
     File.open( file_path, 'w') { |file| 
       file.write(%Q{class #{class_name} < Project\n\tdef initialize\n\t\tproject_name :#{project_name}\n\tend\nend})
-      puts "Auxiliary File Created in: #{file.path}"
+      @@log.info "Auxiliary File Created in: #{file.path}"
     }
   end
   
@@ -52,7 +52,8 @@ class Project
   def self.create_db_row options
     #create project in database
     project = Projects.create({ :title => options[:project], :domain => options[:domain] })
-    puts "Project created in database: #{project.id}"
+    entry   = ProjectData.create({ :url => options[:domain], :status => 'unscraped', :project_id => project.id })
+    @@log.info "Project created in database: #{project.id}"
   end
   
 
@@ -65,12 +66,12 @@ class Project
     #delete folder
     folder_path  = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}"
     FileUtils.rm_rf( folder_path )
-    puts "Deleting: #{folder_path}"
+    @@log.info "Deleting: #{folder_path}"
     
     #delete from database
     project = Projects.find_by( title: options[:project] )
     project.destroy unless project.nil?
-    puts "Deleting: project from database: #{options[:project]}"
+    @@log.info "Deleting: project from database: #{options[:project]}"
   end
   
   

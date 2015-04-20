@@ -32,6 +32,9 @@ module OutriderTools
         end  
 
         working_page = ProjectData.where( status: 'unscraped', project_id: project[:id]).first
+        working_page.status = 'processing'
+        working_page.save
+        
         @log.info "Scraping #{working_page.url}"
         #
         #   Scape it

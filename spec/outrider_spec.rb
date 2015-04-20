@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../lib/outrider.rb'
+require_relative '../lib/outrider/outrider.rb'
 
 describe Outrider do
   
