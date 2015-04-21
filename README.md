@@ -43,10 +43,12 @@ end
 ```
 
 Commands are handled by a gem called Trollop http://manageiq.github.io/trollop/
-*IMPORTANT! Do not modify the existing Trollop configuration and READ THE DOCUMENTATION BEORE MODIFYING*
-*Put your own configuration in the specified places - see below.*
-*Always run tests `rspec spec` after modifying this*
-*TODO - move this functionality into an setup where they don't have to touch commandify.rb
+
+*IMPORTANT!* 
+* Do not modify the existing Trollop configuration and READ THE DOCUMENTATION BEORE MODIFYING
+* Put your own configuration in the specified places - see below.
+* Always run tests `rspec spec` after modifying this
+* TODO - move this functionality into an setup where they don't have to touch commandify.rb
 
 ```ruby
 # in ./lib/outrider/commandify.rb
