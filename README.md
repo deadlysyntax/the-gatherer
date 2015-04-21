@@ -50,9 +50,22 @@ Commands are handled by a gem called Trollop http://manageiq.github.io/trollop/
 
 ```ruby
 # in ./lib/outrider/commandify.rb
+module Commandify
+  def self.process
+
+	# Place custom command options here. See instructions at http://manageiq.github.io/trollop/
+	sub_commands << %w()
+
+	command_opts = Trollop::options do
+	  # REQUIRED. Do not mess with these. Do not duplicate arguments or their short form. Run tests after modifying
+	  opt :domain,     "The domain",                            :short   => "-d",  :type    => String, :default => ''
 
 
-
+	  # CUSTOM. Place custom command options here
+		
+	end
+  end
+end
 ```
 
 
