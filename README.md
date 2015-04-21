@@ -39,14 +39,14 @@ Once created, a project consist of a file `./lib/projects/:project_name/auxiliar
 ##### CLI
 Projects can be created using the command line
 ``` shell 
-// Creates ./lib/projects/:project_name/auxiliary.rb and adds a record to the projects table in the database, 
-// including a seed entry to the raw_data table
+# Creates ./lib/projects/:project_name/auxiliary.rb and adds a record to the projects table in the database, 
+# including a seed entry to the raw_data table
 ./lib/ignite.rb create_project -p project_name
 
-// Just adds a record to the projects table of the database and the seed entry in the raw_data table (doesn't create an auxialiary file)
+# Just adds a record to the projects table of the database and the seed entry in the raw_data table (doesn't create an auxialiary file)
 ./lib/ignite.rb create_project_db_row -p project_name -d http://domain.com
 
-// Deletes the project folder and row in the project table of the database
+# Deletes the project folder and row in the project table of the database
 ./lib/ignite.rb delete_project -p project_name
 ```
 
