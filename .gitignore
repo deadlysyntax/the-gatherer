@@ -7,6 +7,7 @@
 /pkg/
 /spec/reports/
 /config/*
+!/config/schema.sql
 !/config/msg.yml
 logfile.log
 /tmp/
