@@ -37,6 +37,7 @@ For example:
 def my_own_command options
 
 	# Here you have access to the OutriderTools module
+	# Also options is a hash of the commands passed in through CLI
 
 end
 ```
