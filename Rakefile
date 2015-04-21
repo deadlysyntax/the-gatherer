@@ -22,7 +22,7 @@ namespace :project  do
     begin
       ssh = Net::SSH.start(@host['host'], @host['user'], :port => @host['port'], :password => @host['password'] )
       #res = ssh.exec!("/var/www/outrider/current/lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}")
-      res = ssh.exec!("source /usr/local/rvm/scripts/rvm; /var/www/outrider/current/lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}")
+      res = ssh.exec!("source $HOME/.rvm/scripts/rvm; /var/www/outrider/current/lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}")
       ssh.close
       puts res
     rescue Exception => e

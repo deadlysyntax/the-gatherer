@@ -2,7 +2,7 @@ class Project
   
   attr_reader :config, :logger
   
-  @@log    = Logger.new('log/projects.log')
+  @@log    = Logger.new(STDOUT)
   
   def initialize
     @config = {}
