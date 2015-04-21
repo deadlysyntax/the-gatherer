@@ -34,11 +34,9 @@ For example:
 
 ```ruby
 # in ./lib/project/:project_name/auxiliary.rb
-def my_own_command options
-
+def my_own_command( options )
 	# Here you have access to the OutriderTools module
-	# Also options is a hash of the commands passed in through CLI
-
+	# Also, options is a hash of the commands passed in through CLI
 end
 ```
 
@@ -55,16 +53,18 @@ Commands are handled by a gem called Trollop
 # in ./lib/outrider/commandify.rb
 module Commandify
   def self.process
-
 	# Place custom command options here. See instructions at http://manageiq.github.io/trollop/
 	sub_commands << %w()
-
+	# Set these to accept arguments through the command line and pass them to your auxiliary methods
 	command_opts = Trollop::options do
-	  # REQUIRED. Do not mess with these. Do not duplicate arguments or their short form. Run tests after modifying
-	  opt :domain,     "The domain",                            :short   => "-d",  :type    => String, :default => ''
+	  # REQUIRED. Do not mess with the default options. 
+	  # Do not duplicate arguments or their short form. 
+	  # Run tests after modifying
+	  # opt :domain, "The domain", :short => "-d", :type => String, :default => ''
 
 
 	  # CUSTOM. Place custom command options here
+		
 		
 	end
   end
@@ -78,7 +78,10 @@ end
 ```
 
 ###### Options
-Once set up in commandify.rb, your new method in auxiliary.rb
+Once set up in commandify.rb, calling your new method in auxiliary.rb will pass in a hash of the options specified in the command line call. This means your auxiliary methods need to accept the options hash.
+```ruby 
+def auxialiary_method( options )
+end
 
 #### Projects
 When working with Outrider, you first create and then work within a *project*. You can create as many of these as you want. These let us create custom functionality to handle different jobs uniquely.
