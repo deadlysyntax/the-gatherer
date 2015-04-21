@@ -145,10 +145,8 @@ A call to `./ignite.rb crawl -p test_project` will
 
 
 
-# The mighty OutriderTools module
-Outrider Tools is module that provides an API for the core functionality at the the heart of the framework. 
-
-OutriderTools is loaded globally, including in your `auxiliary.rb` files.
+# The OutriderTools module
+Outrider Tools is module that provides an API for the core functionality at the the heart of the framework. It is loaded globally, so that you can call these functions from your projects' `auxiliary.rb` files.
  
 ### OutriderTools API
 #### Crawl
