@@ -10,7 +10,6 @@ Built using Ruby and Python, Outrider's purpose is to provide an easy-to-use int
 
 | Feature | Purpose |
 | ------- | ------- |
-Visit | 
 Data Mining | Outrider provides tools for **collecting**, **cleaning** and **storing data** from the web. 
 Statistical Analysis | Outrider provides libraries for running **statistical algorithms** over datasets.
 	
@@ -205,7 +204,7 @@ The following configuration files are required to be created are. Assuming ./ is
 ```
 
 
-### Database
+#### Database
 *TODO add migrations*
 The mysql-based schema for the Outrider database is found at https://github.com/deadlysyntax/outrider/blob/master/config/schema.sql This is only a guide, and will in future be handled by Active Record.
 
@@ -220,10 +219,10 @@ adapter:  mysql2
 ```
 
 
-### System Information
+#### System Information
 Requires Ruby 2.2.1. Outrider is run on two machines. The development machine and the remote server and deployed using Capistrano. 
 
-### Tests
+#### Tests
 ```shell
 # in project root ./
 rspec spec
