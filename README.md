@@ -144,7 +144,31 @@ A call to `./ignite.rb crawl -p test_project` will
 5. It will call **crawl** and pass in all the options specified in the command line (as long as they're set up in commandify)
 
 
-## Installation
+
+# The mighty OutriderTools module
+Outrider Tools is module that provides an API for the core functionality at the the heart of the framework. 
+
+OutriderTools is loaded globally, including in your `auxiliary.rb` files. 
+
+#### Crawl
+```ruby 
+OutriderTools::Crawl
+```
+##### site
+```ruby 
+OutriderTools::Crawl::site( project, each_page_callback )
+```
+| Argument | Expected Value | Description |
+| -------- | -------------- | ----------- |
+**project** | { :id => 0, :title => '', :domain => '' } | A hash of project config values
+**each_page_callback** | ->( page, uri ){} | A callback function to run, which gets passed the Nokogiri object and URI for each page
+
+Recursively looks to the ProjectData in the database for the first `status: 'unscraped'` data record for the specified project. While at each page, it will run the callback and pass it the Nokogiri::HTML object and the current URI. It builds a list of sanitized urls and adds them as ProjectData rows in the database. Thus, recursively filtering through an entire domain and acting on each page
+
+http://www.rubydoc.info/github/sparklemotion/nokogiri
+
+
+# Installation
 #### Git clone
 
 Move to the directory you'd like to put the Outrider app.

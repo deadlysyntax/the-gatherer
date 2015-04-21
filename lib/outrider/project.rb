@@ -87,28 +87,7 @@ class Project
   end
   
   
-  
-  
 
-  def not_implemented
-    puts "This facade hasn't been implimented by the project"
-  end
-
-  
-  
-  
-  
-  
-  # These methods are our fallback for if 
-  # the method doesn't exist in each project's auxiliary file (which all extend this class)
-  # This is our public interface
-  
-  
-  
-  def crawl_site options
-    # This is a facade
-    not_implemented
-  end
   
   
   
