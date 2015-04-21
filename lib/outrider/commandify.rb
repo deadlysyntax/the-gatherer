@@ -10,6 +10,7 @@ module Commandify
     end
 
     command      = ARGV.shift
+    # Do not modify this
     command_opts = Trollop::options do
         opt :domain,     "The domain",                            :short   => "-d",  :type    => String, :default => ''
         opt :limit,      "Limit",                                 :short   => "-l",  :type    => Integer,:default => 1000
@@ -19,6 +20,9 @@ module Commandify
         #opt :title,     "The title",                             :short   => "-t",  :type    => :default => ''
         opt :set_project,"If we need to set project",             :short   => "-s",:default => true
       end
+      
+      # Place custom command options here. See instructions at http://manageiq.github.io/trollop/
+      command 
 
 
     return {

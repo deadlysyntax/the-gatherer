@@ -28,19 +28,40 @@ At it's basic level, Outrider provides a command line interface, whose commands 
 The commands that can be recognised and run through the CLI form the *Outrider API*. The API sits behind and is accessed through the the command line. Actions that are common to the purposes of Outriders main goals - such as crawling and scraping, are made available publicly by the API and can be called by passing it as the first argument to `./lib/ignite.rb` when using the CLI. In the above example, the word *crawl* is a method of the Outrider API and `-p project_name` tells the API which project to look for the *crawl* implementation.
 
 ##### API Extension
-*This functionality is yet to be implemented*
-The api can be extended by creating the functionality in your project's *auxiliary.rb* in  by passing the `-x true` parameter when calling a command through ignite.rb. 
+The api can be extended by creating the functionality in your project's *auxiliary.rb* and modifying commandify.rb
 
 For example:
 
 ```ruby
 # in ./lib/project/:project_name/auxiliary.rb
-def my_own_command
+def my_own_command options
 
 	# Here you have access to the OutriderTools module
 
 end
 ```
+
+Commands are handled by a gem called Trollop http://manageiq.github.io/trollop/
+*IMPORTANT! Do not modify the existing Trollop configuration and READ THE DOCUMENTATION BEORE MODIFYING*
+*Put your own configuration in the specified places - see below.*
+*Always run tests `rspec spec` after modifying this*
+*TODO - move this functionality into an setup where they don't have to touch commandify.rb
+
+```ruby
+# in ./lib/outrider/commandify.rb
+
+
+
+```
+
+
+##### In your command line
+```shell
+ ./lib/ignite.rb my_own_command -p project_name -your_argument_key value
+```
+
+###### Options
+Once set up in commandify.rb, your new method in auxiliary.rb
 
 #### Projects
 When working with Outrider, you first create and then work within a *project*. You can create as many of these as you want. These let us create custom functionality to handle different jobs uniquely.
