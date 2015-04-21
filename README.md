@@ -16,7 +16,7 @@ Statistical Analysis | Outrider provides libraries for running **statistical alg
 	
 
 
-### Outline 
+## How it works
 #### Command Line Interface
 At it's basic level, Outrider provides a command line interface, whose commands give us the ability to call and pass arguments to our API. The Command line is used by running `./lib/ignite.rb`. When you call this file through your shell, you must pass it a command to run and any arguments to pass through to the command. Such as:
 
@@ -135,9 +135,13 @@ end
 
 
 
-### The process
-A call to `./ignite.rb crawl -p test_project` will first check the validity of the command against the API definition, in this case *crawl* is a legitimate API method, since that passes it will then look in `./lib/project/test_project/auxiliary.rb` for a public method called **crawl**
-
+## The process
+A call to `./ignite.rb crawl -p test_project` will 
+1. Check the validity of the command against the API definition in **./lib/outrider/commandify.rb**, 
+2. In this case **crawl** is a legitimate API method, and since that passes it will then
+3. Look in `./lib/project/test_project/auxiliary.rb` for a public method called **crawl**. 
+4. If it doesn't find it there, it will look in the global `Project` object
+5. It will call **crawl** and pass in all the options specified in the command line (as long as they're set up in commandify)
 
 
 ## Installation
