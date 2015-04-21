@@ -148,12 +148,10 @@ A call to `./ignite.rb crawl -p test_project` will
 # The mighty OutriderTools module
 Outrider Tools is module that provides an API for the core functionality at the the heart of the framework. 
 
-OutriderTools is loaded globally, including in your `auxiliary.rb` files. 
-
+OutriderTools is loaded globally, including in your `auxiliary.rb` files.
+ 
+### OutriderTools API
 #### Crawl
-```ruby 
-OutriderTools::Crawl
-```
 ##### site
 ```ruby 
 OutriderTools::Crawl::site( project, each_page_callback )
@@ -167,6 +165,22 @@ Recursively looks to the ProjectData in the database for the first `status: 'uns
 
 http://www.rubydoc.info/github/sparklemotion/nokogiri
 
+________________________________
+
+#### Scrape
+```ruby 
+OutriderTools::Scrape::page( url, operate )
+```
+| Argument | Expected Value | Description |
+| -------- | -------------- | ----------- |
+**url** | "http://domain.com" | A url to scrape
+**operate** | ->( page, uri ){} | A callback function to run, which gets passed the Nokogiri object and URI for each page
+
+Will go to the URL and run the callback and pass it the Nokogiri::HTML object and the current URI. 
+
+http://www.rubydoc.info/github/sparklemotion/nokogiri
+
+________________________________
 
 # Installation
 #### Git clone

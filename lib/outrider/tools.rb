@@ -79,7 +79,7 @@ module OutriderTools
      
      
      
-     def self.page( url, domain, operate )
+     def self.page( url, operate )
        @log      = Logger.new('log/logfile.log', 'daily')
        files     = OutriderTools::Clean::file_types
        begin
