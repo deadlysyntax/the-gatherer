@@ -161,7 +161,18 @@ The following configuration files are required to be created are. Assuming ./ is
 
 
 ### Database
-* TODO add migrations *
+*TODO add migrations*
+The mysql-based schema for the Outrider database is found at https://github.com/deadlysyntax/outrider/blob/master/config/schema.sql This is only a guide, and will in future be handled by Active Record.
+
+Set up a database, import the schema (if using mysql) and create the following file **./config/db.yml**. This file is expected by the system and will not run without these steps being complete properly.
+
+```yaml
+host:     localhost
+username: root
+password: root
+database: outrider
+adapter:  mysql2
+```
 
 
 ### System Information
