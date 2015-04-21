@@ -80,7 +80,7 @@ end
 ###### Options
 Once set up in commandify.rb, calling your new method in auxiliary.rb will pass in a hash of the options specified in the command line call. This means your auxiliary methods need to accept the options hash.
 ```ruby 
-def auxialiary_method( options )
+def auxiliary_method( options )
   # options contains a hash such as { :project => 'project_name' }
 end
 ```
