@@ -1,7 +1,7 @@
 #require_relative "outrider/version"
 require_relative "./engine"
-require_relative "./commandify"
 require_relative "./tools"
+require_relative "./commandify"
 require_relative "./project"
 
 
