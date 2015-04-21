@@ -15,8 +15,6 @@ class TaskHelper
     #load environment variables
     @data  = YAML.load_file('config/hosts.yml')[env]
   end
-  
-
 end
 
 
@@ -29,11 +27,12 @@ namespace :project  do
   @dev    = TaskHelper.new('dev').data
   
   
+  
   desc "Builds new project on development machine and production"
   task :build, [:title, :domain] do |t, args|
     puts ":: Building project #{args}"
-    
-    command = "#{@prod['ruby']} #{@prod['ignite_path']} create_project_db_row -p #{args[:title]} -d #{args[:domain]}"
+    # Build remote command
+    command = "#{@prod['ruby']}; #{@prod['ignite_path']} create_project_db_row -p #{args[:title]} -d #{args[:domain]}"
     # add project to local system
     sh "#{@dev['ignite_path']} create_project -p #{args[:title]} -d #{args[:domain]}"
     # ssh and run on production server
