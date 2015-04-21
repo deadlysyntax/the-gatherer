@@ -16,7 +16,7 @@ class Project
       :id     => project_meta.id,
       :title  => project_meta.title,
       :domain => project_meta.domain
-    }
+    } unless project_meta.nil?
   end
   
   
@@ -52,6 +52,7 @@ class Project
   def self.create_db_row options
     #create project in database
     project = Projects.create({ :title => options[:project], :domain => options[:domain] })
+    # TODO it might get stuck here if this domain already is in the raw data table
     entry   = ProjectData.create({ :url => options[:domain], :status => 'unscraped', :project_id => project.id })
     @@log.info "Project created in database: #{project.id}"
   end

@@ -20,8 +20,7 @@ module Commandify
         opt :set_project,"If we need to set project",             :short   => "-s",:default => true
       end
 
-    
-    
+
     return {
       :action  => command,
       :options => command_opts
