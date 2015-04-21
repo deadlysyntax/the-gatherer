@@ -42,10 +42,11 @@ def my_own_command options
 end
 ```
 
-Commands are handled by a gem called Trollop http://manageiq.github.io/trollop/
+Commands are handled by a gem called Trollop 
 
 *IMPORTANT!* 
-* Do not modify the existing Trollop configuration and READ THE DOCUMENTATION BEORE MODIFYING
+* Do not modify the existing Trollop configuration 
+* Read the Trollop documentation at http://manageiq.github.io/trollop/
 * Put your own configuration in the specified places - see below.
 * Always run tests `rspec spec` after modifying this
 * TODO - move this functionality into an setup where they don't have to touch commandify.rb
