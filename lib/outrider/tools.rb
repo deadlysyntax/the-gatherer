@@ -9,6 +9,7 @@ require 'json'
 require 'yaml'
 require 'logger'
 require 'time'
+require 'trollop'
 
 
 module OutriderTools
