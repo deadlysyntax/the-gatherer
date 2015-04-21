@@ -17,15 +17,16 @@ namespace :project  do
     
     # add project to local system
     #sh "./lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}"
-    
+
     # ssh and run on production server
     begin
       ssh = Net::SSH.start(@host['host'], @host['user'], :port => @host['port'], :password => @host['password'] )
-      res = ssh.exec!("/var/www/outrider/current/lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}")
+      #res = ssh.exec!("/var/www/outrider/current/lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}")
+      res = ssh.exec!("source /usr/local/rvm/scripts/rvm; /var/www/outrider/current/lib/ignite.rb create_project -p #{args[:title]} -d #{args[:domain]}")
       ssh.close
       puts res
     rescue Exception => e
-      puts "Unable to connect to #{@host[:production][:host]} using #{@host[:production][:user]} :: #{e}"
+      puts "Unable to connect to #{@host['host']} using #{@host['user']} :: #{e}"
     end
   end
 end
