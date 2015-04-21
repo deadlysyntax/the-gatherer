@@ -44,7 +44,8 @@ module OutriderTools
         unless links.nil? 
           links.each  do |link|
             # Check if link already exists
-            if ProjectData.find_by(url: link.to_s).nil?
+            #if ProjectData.find_by(url: link.to_s).nil?
+            unless ProjectData.where( url: link.to_s, project_id: project[:id] ).exists?  
               ProjectData.create({
                 :url        => link.to_s,
                 :status     => 'unscraped',
