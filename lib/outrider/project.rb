@@ -135,10 +135,7 @@ end
 
 class ProjectData < ActiveRecord::Base
   self.table_name = 'raw_data'
-  belongs_to :projects
-  
-  validates_uniqueness_of :url
-  
+  belongs_to :projects  
 end
 
 
