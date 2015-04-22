@@ -39,7 +39,7 @@ module OutriderTools
         @log.info "Scraping #{working_page.url}"
         #
         #   Scape it
-        data, links = OutriderTools::Scrape::page( working_page.url, project[:domain], operate)
+        data, links = OutriderTools::Scrape::page( working_page.url, operate)
 
         unless links.nil? 
           links.each  do |link|
