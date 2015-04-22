@@ -10,8 +10,6 @@
 !/config/schema.sql
 !/config/msg.yml
 logfile.log
-/tmp/
-
 #/lib/projects/*
 #!/lib/projects/
 *.log
