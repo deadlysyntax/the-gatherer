@@ -29,7 +29,7 @@ module OutriderTools
         # Pick a from the database to crawl
         unless ProjectData.where( status: 'unscraped', project_id: project[:id] ).exists?
           @log.info "No pages to scrape"
-          return
+          return false
         end  
 
         working_page = ProjectData.where( status: 'unscraped', project_id: project[:id]).first
@@ -37,37 +37,28 @@ module OutriderTools
         working_page.save
         
         @log.info "Scraping #{working_page.url}"
-        #
-        #   Scape it
+        # Scape it
         data, links = OutriderTools::Scrape::page( working_page.url, operate)
 
-        unless links.nil? 
-          links.each  do |link|
-            # Check if link already exists
-            #if ProjectData.find_by(url: link.to_s).nil?
-            unless ProjectData.where( url: link.to_s, project_id: project[:id] ).exists?  
-              ProjectData.create({
-                :url        => link.to_s,
-                :status     => 'unscraped',
-                :project_id => project[:id]
-              })
-              @log.info "Adding new url to database: #{link.to_s}"
-            else
-              @log.info "URL already exists in database: #{link.to_s}"
-            end
-          end
-        end
-
+        # save links
+        OutriderTools::Link::save_many(links, project, @log )
+        
         @log.info "Saving page data for url #{working_page.url}"
         @log.info data[:status]
         working_page.update( data ) unless data.nil?
-
-        recurse.call
+        
+        return true
       end
 
-      recurse.call
+      crawl = true
+      while crawl
+        crawl = recurse.call
+      end
       
     end
+    
+    
+    
 
     
     
@@ -110,6 +101,34 @@ module OutriderTools
        
      end
      
+  end
+  
+  
+  
+  module Link
+    
+      def self.save_many( links, project, log )
+        
+        unless links.nil? 
+          links.each  do |link|
+            # Check if link already exists
+            #if ProjectData.find_by(url: link.to_s).nil?
+            unless ProjectData.where( url: link.to_s, project_id: project[:id] ).exists?  
+              ProjectData.create({
+                :url        => link.to_s,
+                :status     => 'unscraped',
+                :project_id => project[:id]
+              })
+              log.info "Adding new url to database: #{link.to_s}"
+            else
+              log.info "URL already exists in database: #{link.to_s}"
+            end
+          end
+        end
+        
+        
+      end
+    
   end
   
   
