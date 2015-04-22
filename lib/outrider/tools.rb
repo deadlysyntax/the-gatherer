@@ -139,6 +139,10 @@ module OutriderTools
     
     def self.tidy_urls hrefs, page_uri, domain, files 
       
+      p hrefs
+      p page_uri
+      p domain
+      p files
       # Make these URIs, throwing out problem ones like mailto:
       uris = hrefs.map{ |href| URI.join( page_uri, href ) rescue nil }.compact
 
@@ -153,7 +157,8 @@ module OutriderTools
 
       # Remove #foo fragments so that sub-page links aren't differentiated
       uris.each{ |uri| uri.fragment = nil }
-      
+      p uris
+      p "*_____*"
       return uris
       
     end
@@ -164,14 +169,13 @@ module OutriderTools
     
     
     
-    def self.file_types sub = 'all' 
-      
+    def self.file_types sub = :all 
       case sub
-      when "all" 
+      when :all 
         return %w[png jpeg jpg gif svg txt js css zip gz pdf]
-      when "images"
+      when :images
         return %w[png jpeg jpg gif svg]
-      when "pdfs"
+      when :pdfs
         return %w[pdf]
       else
         return %w[png jpeg jpg gif svg txt js css zip gz pdf]

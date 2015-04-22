@@ -80,8 +80,10 @@ class Project
   #
   # These methods are here simply to help run our unit tests
   def test_super options
+    p "Super Test Called"
     return "Super Test Called"
   end
+  
   def project_name name
     set_config name.to_s
   end

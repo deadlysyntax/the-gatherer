@@ -3,7 +3,7 @@ require_relative '../lib/outrider/tools.rb'
 
 describe OutriderTools do
   
- it "scrapes a domain" do
+  it "crawls a domain" do
    
    #project = Project.find_by(
    #callback = ->(page, url){
@@ -11,9 +11,61 @@ describe OutriderTools do
    #}
    
    #OutriderTools::Crawl::site('test_project', callback )
+  end
+  
+  
+  
+  
+  
+  it "scrapes a single page" do
+    #callback = ->(page, url){
+
+    #}
+    #data, links = OutriderTools::Scrape::page( 'http://google.com', callback )
+    
+    #expect(data).to eq({})
+  
  end
-  
-  
+ 
+ 
+ 
+ 
+ it "saves urls to database" do
+   
+ end
+ 
+ 
+ 
+ 
+ it "tidies urls" do
+   
+ end
+ 
+ 
+ 
+ 
+ 
+ it "returns a full filepath to file + specified file" do
+   filepath =  OutriderTools::Store::get_filepath '/var/outrider/test.rb', 'spec/test.rb'
+   expect(filepath).to eq("/var/outrider/spec/test.rb")
+ end
+ 
+ 
+ it "returns a filename excluding the current folder" do
+    filepath =  OutriderTools::Store::get_filepath '/var/outrider', 'spec/test.rb'
+    expect(filepath).to eq("/var/spec/test.rb")
+  end
+ 
+ 
+ it "returns an array of image filetypes" do
+   image_filetypes = OutriderTools::Clean::file_types :images
+   expect(image_filetypes).to eq(['png','jpeg','jpg','gif','svg'])
+ end
+ 
+  it "defaults return an array of all filetypes" do
+     image_filetypes = OutriderTools::Clean::file_types
+     expect(image_filetypes).to eq(['png','jpeg','jpg','gif','svg','txt','js','css','zip','gz','pdf'])
+   end
 
 
   

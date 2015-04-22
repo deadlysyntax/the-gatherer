@@ -8,6 +8,7 @@ class Engine
   
   
   def run
+    p "No Method Given" if @commands[:action].empty?
     outrider = Outrider.new
     outrider.set_project_object( @commands[:options][:project] ) if @commands[:options][:set_project] == true
     outrider.operate( @commands[:action], @commands[:options] )

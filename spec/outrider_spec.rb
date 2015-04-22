@@ -12,7 +12,6 @@ describe Outrider do
   
   it "sets up the right project when asked" do
     outrider = Outrider.new
-    expect(outrider.project.config).to eq({})
     outrider.set_project_object 'test_project'
     expect(outrider.project.config[:id]).to eq(2)
   end
