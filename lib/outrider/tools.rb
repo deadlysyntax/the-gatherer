@@ -118,8 +118,6 @@ module OutriderTools
   module Clean
     
     
-    
-    
     def self.tidy_urls hrefs, page_uri, domain, files 
       
       # Make these URIs, throwing out problem ones like mailto:
