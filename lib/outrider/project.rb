@@ -128,14 +128,14 @@ end
 
 class Projects < ActiveRecord::Base
   self.table_name = 'projects'
-  has_many :project_data
+  #has_many :project_data
 end
 
 
 
 class ProjectData < ActiveRecord::Base
   self.table_name = 'raw_data'
-  belongs_to :projects  
+  #belongs_to :projects  
 end
 
 
