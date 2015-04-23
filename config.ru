@@ -1,2 +1,2 @@
-require ::File.expand_path('../app/sinatra_app',  __FILE__)
+require ::File.expand_path('../app/run',  __FILE__)
 run Sinatra::Application
