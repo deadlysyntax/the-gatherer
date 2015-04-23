@@ -44,6 +44,9 @@ class Outrider
 
   
   def operate command, options = {}
+    
+      return @config[:messages]["no_method"] if command.nil?
+      
       if @project.respond_to?(command)
         return @project.send( command, options ) 
       else

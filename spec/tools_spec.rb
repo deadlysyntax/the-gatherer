@@ -5,12 +5,27 @@ describe OutriderTools do
   
   it "crawls a domain" do
    
-   #project = Project.find_by(
-   #callback = ->(page, url){
-     
-   #}
+    project = Project.new
+    project.set_config "test_project"
+    
+    project_record = ProjectData.find_by( url: 'http://outriderapp.com/test/1' )
+    project_record.status = 'unscraped'
+    project_record.save
+    
+    callback = ->(page, url){
+      return {
+        :title_raw                 => page.css('h1.test_class').text.strip,
+        :content_raw               => page.css('p.content').map{|paragraph| paragraph.text.strip }.to_json,
+        :status                    => 'scraped'
+      }
+    }
    
-   #OutriderTools::Crawl::site('test_project', callback )
+   OutriderTools::Crawl::site(project.config, callback )
+   
+   new_project = ProjectData.find_by( url: "http://outriderapp.com/test/2" )
+   expect(new_project).to be_a ProjectData
+   expect(new_project.title_raw).to eq("Test 2")
+   expect(new_project.status).to eq("scraped")
   end
   
   
@@ -18,37 +33,59 @@ describe OutriderTools do
   
   
   it "scrapes a single page" do
+    
+    # Delete any existing test pages
+    old_project = ProjectData.find_by( url: "http://outriderapp.com/test/2" )
+    old_project.destroy unless old_project.nil?
+    
     project = Project.new
     project.set_config "test_project"
     
     callback = ->(page, url){
       return {
         :title_raw                 => page.css('h1.test_class').text.strip,
-        :content_raw               => page.css('p.content').map{|paragraph| paragraph.text.strip }.to_json
+        :content_raw               => page.css('p.content').map{|paragraph| paragraph.text.strip }.to_json,
         :status                    => 'scraped'
       }
     }
     
     data, links = OutriderTools::Scrape::page( project.config[:domain], callback )
     
-    p "################"
-    p data
-    p links
-    #expect(data).to eq({})
+    expect(data).to eq({:title_raw=>"Test 1", :content_raw=>"[\"This page is no use to you\"]", :status=>"scraped"})
+    expect(links[0].to_s).to eq("http://outriderapp.com/test/2")
   
  end
  
  
  
  
- it "saves urls to database" do
+ 
+ it "skips errors when opening a url" do
    
  end
  
  
  
+
+ 
+ 
+ 
  
  it "tidies urls" do
+   project = Project.new
+   project.set_config "test_project"
+   
+   callback = ->(page, url){
+     return {
+       :title_raw                 => page.css('h1.test_class').text.strip,
+       :content_raw               => page.css('p.content').map{|paragraph| paragraph.text.strip }.to_json,
+       :status                    => 'scraped'
+     }
+   }
+   
+   data, links = OutriderTools::Scrape::page( project.config[:domain], callback )
+   
+   p links
    
  end
  
