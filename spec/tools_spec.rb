@@ -85,7 +85,8 @@ describe OutriderTools do
    
    data, links = OutriderTools::Scrape::page( project.config[:domain], callback )
    
-   p links
+   expect(links[0].to_s).to eq("http://outriderapp.com/test/2")
+   expect(links[1]).to be nil
    
  end
  
