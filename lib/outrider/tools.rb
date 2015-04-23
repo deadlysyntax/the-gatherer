@@ -10,6 +10,7 @@ require 'yaml'
 require 'logger'
 require 'time'
 require 'trollop'
+require_relative 'intel'
 
 
 module OutriderTools
@@ -174,9 +175,28 @@ module OutriderTools
       else
         return %w[png jpeg jpg gif svg txt js css zip gz pdf]
       end
-      
     end
     
+    
+    
+    
+    # takes string of words, sorts out duds and returns array
+    def self.process_words_to_array words = ""
+      clean_words = words.split.each do |word|
+        word.downcase!
+      end
+    end
+    
+    
+    
+    # takes array of strings and combines them
+    def self.word_array_to_string strings
+      the_string = ''
+      strings.each do |string|
+        the_string += string.gsub(/[^a-z0-9\s]/i, '')
+      end
+      return the_string
+    end
      
   end
   

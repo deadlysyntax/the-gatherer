@@ -16,4 +16,5 @@ gem 'rvm1-capistrano3',        '~> 1.3.2.2'
 gem 'capistrano-bundler',      '~> 1.1.4'
 gem 'rack',                    '~> 1.6.0'
 gem 'sinatra',                 '~> 1.4.6'
+gem 'facets',                  '~> 3.0.0'
 

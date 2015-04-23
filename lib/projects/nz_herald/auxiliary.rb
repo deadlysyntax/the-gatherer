@@ -31,7 +31,11 @@ class NzHerald < Project
   
   
   
-  
+  def intel options
+    
+    
+    
+  end
   
   
   

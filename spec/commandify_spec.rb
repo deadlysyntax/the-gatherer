@@ -14,7 +14,8 @@ describe Commandify do
         :filename    => "", 
         :restrict    => true, 
         :help        => false,
-        :set_project => true
+        :set_project => true,
+        :intel_command =>""
       }
     })
   end
