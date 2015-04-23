@@ -18,11 +18,22 @@ describe OutriderTools do
   
   
   it "scrapes a single page" do
-    #callback = ->(page, url){
-
-    #}
-    #data, links = OutriderTools::Scrape::page( 'http://google.com', callback )
+    project = Project.new
+    project.set_config "test_project"
     
+    callback = ->(page, url){
+      return {
+        :title_raw                 => page.css('h1.test_class').text.strip,
+        :content_raw               => page.css('p.content').map{|paragraph| paragraph.text.strip }.to_json
+        :status                    => 'scraped'
+      }
+    }
+    
+    data, links = OutriderTools::Scrape::page( project.config[:domain], callback )
+    
+    p "################"
+    p data
+    p links
     #expect(data).to eq({})
   
  end

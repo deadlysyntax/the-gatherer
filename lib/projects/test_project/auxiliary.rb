@@ -26,6 +26,7 @@ class TestProject < Project
   # options are passed through from the command line
   #
   def crawl options
+
     OutriderTools::Crawl::site( @config, ->(page, uri){
       unless( page.css('.story_landing').text.strip.empty? )
         #p page.css('.story_landing .story__dateline span').empty?

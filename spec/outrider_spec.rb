@@ -21,7 +21,7 @@ describe Outrider do
   it "sets project config[:domain]" do
     outrider = Outrider.new
     outrider.set_project_object 'test_project'
-    expect(outrider.project.config[:domain]).to eq("http://outriderapp.com/scrape_test.php")
+    expect(outrider.project.config[:domain]).to eq("http://outriderapp.com/test/1")
   end
   
   

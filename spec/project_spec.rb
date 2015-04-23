@@ -13,7 +13,7 @@ describe Project do
   it "sets config from database" do
     project = Project.new
     project.set_config "test_project"
-    expect(project.config).to eq({:id=>2, :title=>"test_project", :domain=>"http://outriderapp.com/scrape_test.php"})
+    expect(project.config).to eq({:id=>2, :title=>"test_project", :domain=>"http://outriderapp.com/test/1"})
   end
 
   
