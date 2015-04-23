@@ -1,4 +1,2 @@
-app = proc do |env|
-    [200, { "Content-Type" => "text/html" }, ["Restarting automatically..."]]
-end
-run app
+require ::File.expand_path('../app/sinatra_app',  __FILE__)
+run Sinatra::Application

@@ -15,4 +15,5 @@ gem 'capistrano',              '~> 3.4.0'
 gem 'rvm1-capistrano3',        '~> 1.3.2.2'
 gem 'capistrano-bundler',      '~> 1.1.4'
 gem 'rack',                    '~> 1.6.0'
+gem 'rails',                   '~> 4.2.1'
 
