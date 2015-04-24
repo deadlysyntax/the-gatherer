@@ -37,6 +37,26 @@ class Stuff < Project
   
   
   
+  def intel options
+    
+    raw_articles = ProjectData.where( "project_id = ? AND content_raw IS NOT NULL", @config[:id] ).limit(10000)
+    
+    paragraphs   = ''
+    words        = []
+    
+    raw_articles.each do |article|
+      paragraphs   += OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) ) + ' '
+    end
+    
+    words        = OutriderIntel::word_frequency( OutriderTools::Clean::process_words_to_array( paragraphs ) )
+    words        = words.sort_by { |word, frequency| frequency }
+      
+    p words
+    
+  end
+  
+  
+  
   
 
 
