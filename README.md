@@ -6,6 +6,37 @@
 
 Built using Ruby and Python, Outrider's purpose is to provide an easy-to-use interface and set of tools to help create and run tasks that can programmatically visit, process, scrape, clean, store, analyse, access and display data from online sources. 
 
+Outrider projects are easily created using a rake command and your new project file automatically has access to the OutriderTools API and database. For examples 
+
+```ruby  
+# creates a new project file
+rake project:build['nz_herald','http://nzherald.com']
+
+# /projects/nz_herald/auxiliary.rb
+# Returns scraped data from each page to be stored in the database
+# using the Outrider storage format.
+def crawl options
+OutriderTools::Crawl::site( @config, ->(page, uri){
+  unless(  page.css('.articleTitle').text.strip.empty? )
+    clean_date = DateTime.strptime(page.css('.storyDate').text.strip, '%a %b %d %H:%M:%S %Z %Y').to_s #Tue Mar 03 08:27:23 UTC 2015
+    return {
+      :title_raw                 => page.css('.articleTitle').text.strip,
+      :author                    => page.css('.authorName a').text.strip,
+      :content_raw               => page.css('#articleBody p').map{ |paragraph| paragraph.text.strip }.to_json,
+      :date_published_raw        => page.css('.storyDate').text.strip,
+      :date_published_timestamp  => clean_date,
+      :status                    => 'scraped'
+    }
+  else
+    return {
+      :status              => 'rejected'
+    }
+  end
+})
+end
+```
+
+
 ### Features
 
 | Feature | Purpose |
