@@ -32,3 +32,9 @@ CREATE TABLE `raw_data` (
   `date_published_timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Our seed data
+# -------------------------------------------------------------
+INSERT INTO `projects` (`title`, `domain`)
+VALUES ('test_project','http://outriderapp.com/test/1'),
