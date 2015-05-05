@@ -75,6 +75,7 @@ class Outrider
 
 
   def load_database
+    p @config
        ActiveRecord::Base.establish_connection(@config[:database])
   end
   
