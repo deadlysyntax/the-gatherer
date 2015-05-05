@@ -227,7 +227,7 @@ Move to the directory you'd like to put the Outrider app.
 The following configuration files are required to be created are. Assuming ./ is app root
 ```ruby
 # - config
-# - - \ - db.yml
+# - - \ - database.yml
 # - - - - hosts.yml
 # - - \ - deploy.rb
 # - - \ - deploy \
@@ -239,7 +239,7 @@ The following configuration files are required to be created are. Assuming ./ is
 *TODO add migrations*
 The mysql-based schema for the Outrider database is found at https://github.com/deadlysyntax/outrider/blob/master/config/schema.sql This is only a guide, and will in future be handled by Active Record.
 
-Set up a database, import the schema (if using mysql) and create the following file **./config/db.yml**. This file is expected by the system and will not run without these steps being complete properly.
+Set up a database, import the schema (if using mysql) and create the following file **./config/database.yml**. This file is expected by the system and will not run without these steps being complete properly.
 
 ```yaml
 host:     localhost
