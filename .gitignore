@@ -8,7 +8,7 @@
 /spec/reports/
 /config/*
 !/config/schema.sql
-!/config/msg.yml
+!/config/message.yml
 logfile.log
 #/lib/projects/*
 #!/lib/projects/
