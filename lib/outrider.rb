@@ -1,8 +1,8 @@
 #require_relative "outrider/version"
-require_relative "./engine"
-require_relative "./tools"
-require_relative "./commandify"
-require_relative "./project"
+require_relative "outrider/engine"
+require_relative "outrider/tools"
+require_relative "outrider/commandify"
+require_relative "outrider/project"
 
 
 # Provides an interface as to what commands can be run
@@ -18,8 +18,8 @@ class Outrider
   def initialize
     @project  = Project.new
     @config   = {
-      :database => load_yaml( __FILE__, "../../config/database.yml",   "Couldn't load database config file"),
-      :messages => load_yaml( __FILE__, "../../config/messages.yml",   "Couldn't load messages config file")
+      :database => load_yaml( __FILE__, "../config/database.yml",   "Couldn't load database config file"),
+      :messages => load_yaml( __FILE__, "../config/messages.yml",   "Couldn't load messages config file")
     }
     @db       = load_database 
   end
@@ -29,9 +29,9 @@ class Outrider
 
 
   def set_project_object project
-    project_path = OutriderTools::Store::get_filepath __FILE__, "../../projects/#{project}/auxiliary.rb"
+    project_path = OutriderTools::Store::get_filepath __FILE__, "../projects/#{project}/auxiliary.rb"
     if File.exist? project_path
-      require_relative "../../projects/#{project}/auxiliary"
+      require_relative "../projects/#{project}/auxiliary"
       # Initialze object for the project we're working on
       @project = project.classify.constantize.new
     else
