@@ -26,7 +26,7 @@ class Project
     
     class_name   = options[:project].classify
     project_name = options[:project].parameterize.underscore
-    file_path    = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}/auxiliary.rb"
+    file_path    = OutriderTools::Store::get_filepath( __FILE__, "../../projects/#{options[:project]}/auxiliary.rb" )
 
     #create project files by making a copy of test_project
     require 'fileutils'
@@ -65,7 +65,7 @@ class Project
   
   def self.delete options
     #delete folder
-    folder_path  = OutriderTools::Store::get_filepath __FILE__, "../projects/#{options[:project]}"
+    folder_path  = OutriderTools::Store::get_filepath( __FILE__, "../../projects/#{options[:project]}" )
     FileUtils.rm_rf( folder_path )
     @@log.info "Deleting: #{folder_path}"
     

@@ -24,14 +24,14 @@ describe Project do
     Project::create_db_row({ :domain => 'http://temporary.com', :project => 'temporary' })
     Project::delete({ :project => 'temporary' })
     expect( Projects.find_by( title: 'temporary' ) ).to be nil
-    expect( File ).not_to exist('../lib/outrider/projects/temporary/auxiliary.rb')
+    expect( File ).not_to exist('../projects/temporary/auxiliary.rb')
     
   end
 
 
 
   it "sets up a new project in the filesystem" do
-    filepath = OutriderTools::Store::get_filepath __FILE__, "../lib/projects/temporary/auxiliary.rb"
+    filepath = OutriderTools::Store::get_filepath __FILE__, "../projects/temporary/auxiliary.rb"
     Project::create_folder({ :domain => 'http://temporary.com', :project => 'temporary' })
     expect( File ).to exist(filepath)
     Project::delete({ :project => 'temporary' })

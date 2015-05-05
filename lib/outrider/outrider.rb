@@ -16,12 +16,12 @@ class Outrider
   # When initialized, do so with our base project facade,
   # and change it later once everything else is initialized based on the specified project
   def initialize
-    @project           = Project.new
-    @config = {
-      :database => load_yaml( __FILE__, "../../config/db.yml",   "Couldn't load database config file"),
-      :messages => load_yaml( __FILE__, "../../config/msg.yml",  "Couldn't load messages config file")
+    @project  = Project.new
+    @config   = {
+      :database => load_yaml( __FILE__, "../../config/database.yml",   "Couldn't load database config file"),
+      :messages => load_yaml( __FILE__, "../../config/messages.yml",   "Couldn't load messages config file")
     }
-    @db                = load_database 
+    @db       = load_database 
   end
   
   
@@ -29,9 +29,9 @@ class Outrider
 
 
   def set_project_object project
-    project_path = OutriderTools::Store::get_filepath __FILE__, "../projects/#{project}/auxiliary.rb"
+    project_path = OutriderTools::Store::get_filepath __FILE__, "../../projects/#{project}/auxiliary.rb"
     if File.exist? project_path
-      require_relative "../projects/#{project}/auxiliary"
+      require_relative "../../projects/#{project}/auxiliary"
       # Initialze object for the project we're working on
       @project = project.classify.constantize.new
     else

@@ -2,8 +2,8 @@ class Engine
   
   attr_accessor :commands
 
-  def initialize
-    @commands = Commandify::process
+  def initialize commands = Commandify::process
+    @commands = commands
   end
   
   
