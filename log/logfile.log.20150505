@@ -1,0 +1,20 @@
+# Logfile created on 2015-05-05 12:05:02 +1000 by logger.rb/41954
+E, [2015-05-05T12:05:02.391550 #1719] ERROR -- : Error 
+E, [2015-05-05T14:41:12.020550 #2011] ERROR -- : Error undefined method `split' for #<URI::HTTP:0x007fc852a3c880 URL:http://redtube.com/304379>
+E, [2015-05-05T14:41:31.535400 #2013] ERROR -- : Error undefined method `split' for #<URI::HTTP:0x007fa77c237168 URL:http://redtube.com/521518>
+E, [2015-05-05T14:42:57.967457 #2014] ERROR -- : Error 
+E, [2015-05-05T15:22:07.203199 #2039] ERROR -- : Error 
+E, [2015-05-05T15:54:34.634043 #2074] ERROR -- : Skipping invalid link http://theage.com.au/lifestyle/beauty
+E, [2015-05-05T15:55:27.751404 #2076] ERROR -- : Skipping invalid link http://theage.com.au/destinations
+E, [2015-05-05T15:55:34.932800 #2076] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T15:56:02.932491 #2076] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T15:56:37.257738 #2076] ERROR -- : Error 
+E, [2015-05-05T15:59:57.006847 #2078] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T16:01:41.244089 #2081] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T16:01:56.948562 #2082] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T16:05:12.720187 #2083] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T16:06:27.921789 #2084] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T16:08:13.145935 #2086] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T16:08:46.393395 #2087] ERROR -- : Error undefined local variable or method `ppage' for #<Theage:0x007fb199184c08>
+E, [2015-05-05T16:08:54.922757 #2088] ERROR -- : Skipping page that causes argument error: invalid date
+E, [2015-05-05T21:11:45.987879 #2315] ERROR -- : Error 
