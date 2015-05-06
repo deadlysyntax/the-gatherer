@@ -13,7 +13,7 @@ class TaskHelper
   
   def initialize env
     #load environment variables
-    @data  = YAML.load_file('config/hosts.yml')[env]
+    @data  = YAML.load_file('~/.outrider/config/hosts.yml')[env]
   end
 end
 

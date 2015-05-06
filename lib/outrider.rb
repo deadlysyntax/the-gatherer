@@ -18,7 +18,7 @@ class Outrider
   def initialize
     @project  = Project.new
     @config   = {
-      :database => load_yaml( __FILE__, "../config/database.yml",   "Couldn't load database config file"),
+      :database => load_yaml( '~/.outrider/config', "database.yml",   "Couldn't load database config file"),
       :messages => load_yaml( __FILE__, "../config/messages.yml",   "Couldn't load messages config file")
     }
     @db       = load_database 
