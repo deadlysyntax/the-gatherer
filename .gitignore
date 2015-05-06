@@ -14,4 +14,4 @@ logfile.log
 #!/lib/projects/
 *.log
 .DS_Store
-#/log/*
+/log/*

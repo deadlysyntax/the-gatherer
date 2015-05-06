@@ -1,8 +1,0 @@
-# Logfile created on 2015-04-22 17:19:41 +1000 by logger.rb/41954
-E, [2015-04-22T17:24:40.378663 #3069] ERROR -- : Error 
-E, [2015-04-22T17:32:47.763161 #3079] ERROR -- : Skipping invalid link http://stuff.co.nz/about-stuff/2715191/Mobile
-E, [2015-04-22T17:33:36.320583 #3079] ERROR -- : Error 
-E, [2015-04-22T17:34:51.421750 #3088] ERROR -- : Error 
-E, [2015-04-22T19:41:26.527737 #3220] ERROR -- : Error undefined local variable or method `urls' for OutriderTools::Clean:Module
-E, [2015-04-22T19:41:43.919351 #3221] ERROR -- : Error 
-E, [2015-04-22T19:47:49.496358 #3226] ERROR -- : Error 
