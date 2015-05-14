@@ -1,3 +1,7 @@
+# OutriderTools glues all the core methods together
+# The additional libraries support Tools tasks
+# The code that requires this library is the code that
+# processes and runs our commands and projects - the scaffolding
 require 'nokogiri'
 require 'active_record'
 require 'active_support/core_ext/module/attribute_accessors'
@@ -10,6 +14,9 @@ require 'yaml'
 require 'logger'
 require 'time'
 require 'trollop'
+
+# Bring in our additional outrider libraries
+#require_relative 'redditbot'
 require_relative 'intel'
 
 

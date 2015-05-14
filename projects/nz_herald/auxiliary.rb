@@ -51,6 +51,17 @@ class NzHerald < Project
   
   
   
+  
+  def reddit options
+    
+    p 'stuf'# Redditbot::get_subscribes
+    
+    
+    
+  end
+  
+  
+  
 end
 
 

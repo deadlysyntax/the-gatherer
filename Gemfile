@@ -17,4 +17,5 @@ gem 'capistrano-bundler',      '~> 1.1.4'
 gem 'rack',                    '~> 1.6.0'
 gem 'sinatra',                 '~> 1.4.6'
 gem 'facets',                  '~> 3.0.0'
+gem 'redditkit',               '~> 1.0.1'
 
