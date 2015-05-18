@@ -53,8 +53,11 @@ module OutriderTools
         
         @log.info "Saving page data for url #{working_page.url}"
         @log.info data[:status]
-        working_page.update( data ) unless data.nil?
-        
+        begin 
+          working_page.update( data ) unless data.nil?
+        rescue ActiveRecord::ActiveRecordError
+          @log.info "FAILED :: Couldn't save page data for url #{working_page.url}"
+        end
         return true
       end
 
