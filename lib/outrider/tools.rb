@@ -121,13 +121,17 @@ module OutriderTools
           links.each  do |link|
             # Check if link already exists
             #if ProjectData.find_by(url: link.to_s).nil?
-            unless ProjectData.where( url: link.to_s, project_id: project[:id] ).exists?  
-              ProjectData.create({
-                :url        => link.to_s,
-                :status     => 'unscraped',
-                :project_id => project[:id]
-              })
-              log.info "Adding new url to database: #{link.to_s}"
+            unless ProjectData.where( url: link.to_s, project_id: project[:id] ).exists? 
+              begin  
+                ProjectData.create({
+                  :url        => link.to_s,
+                  :status     => 'unscraped',
+                  :project_id => project[:id]
+                })
+                log.info "Adding new url to database: #{link.to_s}"
+              rescue ActiveRecord::ActiveRecordError
+                log.info "Error saving page to database"
+              end
             else
               log.info "URL already exists in database: #{link.to_s}"
             end
