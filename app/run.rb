@@ -7,8 +7,8 @@ get '/' do
 end
 
 
-get '/media-insights' do
-  erb "media-insights"
+get '/media_insights' do
+  erb :media_insights
   #helpers::load_view('media_insights')
 end
 
