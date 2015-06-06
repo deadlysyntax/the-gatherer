@@ -8,7 +8,7 @@ end
 
 
 get '/media-insights' do
-  helpers::load_vie('media_insights')
+  helpers::load_view('media_insights')
 end
 
 
