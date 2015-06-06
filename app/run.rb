@@ -1,5 +1,5 @@
 require 'sinatra'
-require_relative 'core/functions.rb'
+require_relative 'core/functions'
 
 
 get '/' do

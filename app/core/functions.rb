@@ -1,1 +1,1 @@
-require_relative 'core/helpers.rb'
+require_relative 'helpers'
