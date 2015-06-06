@@ -8,7 +8,8 @@ end
 
 
 get '/media-insights' do
-  helpers::load_view('media_insights')
+  "<h1>Media Insight</h1>"
+  #helpers::load_view('media_insights')
 end
 
 
