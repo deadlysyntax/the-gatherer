@@ -1,5 +1,5 @@
 require 'sinatra'
-require_relative 'functions.rb'
+require_relative 'core/functions.rb'
 
 
 get '/' do
@@ -8,7 +8,7 @@ end
 
 
 get '/media-insights' do
-  "<h1>Media Insight</h1>"
+  erb "media-insights"
   #helpers::load_view('media_insights')
 end
 
