@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/Users/jaap/.rvm/rubies/ruby-2.2.1/bin/ruby
 
 # Outrider loads in everything we need
 require_relative './outrider.rb'

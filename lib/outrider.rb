@@ -17,7 +17,7 @@ class Outrider
   # and change it later once everything else is initialized based on the specified project
   def initialize
     @project  = Project.new
-    
+
     @config   = {
       :database => load_global_config( 'database',  "Couldn't load database configuration" ),
       :messages => load_yaml( __FILE__, "../config/messages.yml",   "Couldn't load messages config file")

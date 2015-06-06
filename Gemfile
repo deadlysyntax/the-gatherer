@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'trollop',                 '~> 2.1.2'
-gem 'nokogiri',                '~> 1.6.6.2'
+gem 'nokogiri',                '1.6.6.2'
 gem 'mechanize',               '~> 2.7.3'
 gem 'activesupport',           '~> 4.2.1'
 gem 'i18n',                    '~> 0.7.0'
@@ -18,4 +18,3 @@ gem 'rack',                    '~> 1.6.0'
 gem 'sinatra',                 '~> 1.4.6'
 gem 'facets',                  '~> 3.0.0'
 gem 'redditkit',               '~> 1.0.1'
-

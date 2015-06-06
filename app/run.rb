@@ -1,11 +1,32 @@
 require 'sinatra'
-
+require_relative 'functions.rb'
 
 
 get '/' do
-  "Outrider reporting for duty"
+  "<p>Outrider reporting for duty</p>"
 end
 
+
+get '/media-insights' do
+  helpers::load_vie('media_insights')
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#     These urls are used by our test suite to make sure our scraper is working
+#
+#
 get '/test/1' do
   "<h1 class='test_class'>Test 1</h1><a href='http://outriderapp.com/test/2'>Link</a><br /><p class='content'>This page is no use to you</p>"
 end

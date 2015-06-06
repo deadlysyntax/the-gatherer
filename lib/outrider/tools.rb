@@ -16,7 +16,7 @@ require 'time'
 require 'trollop'
 
 # Bring in our additional outrider libraries
-#require_relative 'redditbot'
+require_relative 'redditbot'
 require_relative 'intel'
 
 
@@ -53,12 +53,12 @@ module OutriderTools
         
         @log.info "Saving page data for url #{working_page.url}"
         @log.info data[:status]
-        begin 
+        #begin 
           working_page.update( data ) unless data.nil?
-        rescue ActiveRecord::ActiveRecordError
-          @log.info "FAILED :: Couldn't save page data for url #{working_page.url}"
-        end
-        return true
+        #rescue ActiveRecord::ActiveRecordError
+        #  @log.info "FAILED :: Couldn't save page data for url #{working_page.url}"
+        #end
+        #return true
       end
 
       crawl = true
