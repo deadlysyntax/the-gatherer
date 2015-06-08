@@ -33,21 +33,34 @@ class NzHerald < Project
   
   def intel options
     
-    raw_articles = ProjectData.where( "project_id = ? AND content_raw IS NOT NULL", @config[:id] ).limit(10000)
+    #raw_articles = ProjectData.where( "project_id = ? AND content_raw IS NOT NULL", @config[:id] ).limit(10000)
+    #p Frequency::Analyze::articles( raw_articles )
+    
+    
+    raw_articles = ProjectData.where( "project_id = ? AND content_raw IS NOT NULL", @config[:id] ).limit(10)
     
     paragraphs   = ''
     words        = []
-    
+
     raw_articles.each do |article|
-      paragraphs   += OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) ) + ' '
-    end
-    
-    words        = OutriderIntel::word_frequency( OutriderTools::Clean::process_words_to_array( paragraphs ) )
-    words        = words.sort_by { |word, frequency| frequency }
+      #paragraphs   += OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) ) + ' '
+      text = OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) )
+      p Sentiment::Analyze::document( text )
+      p "\n\n" 
       
-    p words
+    end
+
+    #p paragraphs
+    #p "***********"
+    #words        = Frequency::Tools::word_frequency( OutriderTools::Clean::process_words_to_array( paragraphs ) )
+    #words.sort_by { |word, frequency| frequency }
     
   end
+  
+  
+  
+  
+  
   
   
   

@@ -144,3 +144,9 @@ class ProjectData < ActiveRecord::Base
 end
 
 
+class Datum < ActiveRecord::Base
+  self.table_name = 'datum'
+  #belongs_to :projects
+end
+
+

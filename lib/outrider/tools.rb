@@ -207,7 +207,7 @@ module OutriderTools
     def self.word_array_to_string strings
       the_string = ''
       strings.each do |string|
-        the_string += string.gsub(/[^a-z0-9\s]/i, '')
+        the_string += string.gsub(/[^a-z0-9\s]/i, '') + ' '
       end
       return the_string
     end
