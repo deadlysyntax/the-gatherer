@@ -12,7 +12,6 @@
 logfile.log
 #/lib/projects/*
 #!/lib/projects/
-/lib/ignite.rb
 *.log
 .DS_Store
 /log/*
