@@ -97,22 +97,17 @@ module Commandify
       # opt :domain, "The domain", :short => "-d", :type => String, :default => ''
 
 
-      # CUSTOM. Place custom command options here
-
-
+      ############################################ 
+	  # CUSTOM. Place custom command options here
+	  #
     end
   end
 end
 ```
 
+Any commands listed in the `sub_commands` variable can then be defined within any of your projects' `auxiliary.rb` file and run by specifying it in the CLI call.
 
-#### API
-The commands that can be recognised and run through the CLI form the *Outrider API*. The API sits behind and is accessed through the the command line. Actions that are common to the purposes of Outriders main goals - such as crawling and scraping, are made available publicly by the API and can be called by passing it as the first argument to `./lib/ignite.rb` when using the CLI. In the above example, the word *crawl* is a method of the Outrider API and `-p project_name` tells the API which project to look for the *crawl* implementation.
-
-##### API Extension
-The api can be extended by creating the functionality in your project's *auxiliary.rb* and modifying commandify.rb
-
-For example:
+So if you were to add a `sentiment` command to the `sub_commands` variable in `./lib/commandify.rb`, then add a `sentiment` method to your projects auxiliary file, you could then run that function by calling `./lib/ignite.rb sentiment -p project_name`.
 
 ```ruby
 # in ./lib/project/:project_name/auxiliary.rb
@@ -122,6 +117,7 @@ def my_own_command( options )
 end
 ```
 
+#### More  on creating CLI commands.
 Commands are handled by a gem called Trollop 
 
 *IMPORTANT!* 
@@ -130,8 +126,6 @@ Commands are handled by a gem called Trollop
 * Put your own configuration in the specified places - see below.
 * Always run tests `rspec spec` after modifying this
 * TODO - move this functionality into an setup where they don't have to touch commandify.rb
-
-
 
 
 ##### In your command line
@@ -147,61 +141,6 @@ def auxiliary_method( options )
 end
 ```
 
-#### Projects
-When working with Outrider, you first create and then work within a *project*. You can create as many of these as you want. These let us create custom functionality to handle different jobs uniquely.
-
-
-#### Creating Projects
-##### CLI
-Projects can be created using the command line
-``` shell 
-# Creates ./lib/projects/:project_name/auxiliary.rb 
-#and adds a record to the projects table in the database, 
-# including a seed entry to the raw_data table
-./lib/ignite.rb create_project -p project_name
-
-# Just adds a record to the projects table of the database 
-#and the seed entry in the raw_data table (doesn't create an auxialiary file)
-./lib/ignite.rb create_project_db_row -p project_name -d http://domain.com
-
-# Deletes the project folder and row in the project table of the database
-./lib/ignite.rb delete_project -p project_name
-```
-
-##### RAKE
-Outrider is assumed to run on two machines - a dev and a production server. When you create a new project you do so on the dev server and it gets added to git, however in order to make a project runnable in production, there must be some entries in the database for that. Outrider has a rake command that is run from the dev server which creates the files and db entry on the dev server and also creates the necessary database entries on the production server. 
-
-```shell
-rake project:build['project_name','project_domain']
-```
-
-#### Customizing Projects
-Once created, a project consist of a file `./lib/projects/:project_name/auxiliary.rb` which contains a class whose public methods correspond to the CLI commands. 
-
-```ruby
-# lib/projects/test_project/auxiliary.rb
-
-class TestProject < Project
-
-	def initialize
-		project_name :test_project
-	end
-
-	def crawl
-		# See OutriderTools documentation http://github.com/deadlysyntax/outrider
-		# You have full access to the OutriderTools module 
-		# You inheret all the methods and instance variables defined in the global Project class
-		# Which also gives you access to @config which is a hash containing :id, :title and :domain of the project
-	
-		OutriderTools::Crawl::site( @config, ->(page, uri){
-      		# Use the Nokogiri page object here to do what you want to each page
-    	})
-	end
-end
-```
-
-
-
 ## The process
 A call to `./ignite.rb crawl -p test_project` will 
 1. Check the validity of the command against the API definition in **./lib/outrider/commandify.rb**, 
@@ -212,8 +151,9 @@ A call to `./ignite.rb crawl -p test_project` will
 
 
 
-# The OutriderTools module
-Outrider Tools is module that provides an API for the core functionality at the the heart of the framework. It is loaded globally, so that you can call these functions from your projects' `auxiliary.rb` files.
+### The Outrider Tools API
+Within the auxiliary function you define, you have access to a powerful API that provides functionality and tools that are common to the purposes of Outriders main goals - such as crawling and scraping.
+
  
 ### OutriderTools API
 #### Crawl
@@ -254,45 +194,37 @@ ________________________________
 ## Frequency
 
 
+# Projects
+When working with Outrider, you first create and then work within a *project*. You can create as many of these as you want. These let us create custom functionality to handle different jobs uniquely.
 
 
-# Installation
-#### Git clone
+#### Creating Projects
+##### CLI
+Projects can be created using the command line
+``` shell 
+# Creates ./lib/projects/:project_name/auxiliary.rb 
+#and adds a record to the projects table in the database, 
+# including a seed entry to the raw_data table
+./lib/ignite.rb create_project -p project_name
 
-Move to the directory you'd like to put the Outrider app.
+# Just adds a record to the projects table of the database 
+#and the seed entry in the raw_data table (doesn't create an auxialiary file)
+./lib/ignite.rb create_project_db_row -p project_name -d http://domain.com
 
-> git clone git@github.com:deadlysyntax/outrider.git
-
-
-#### Configuration
-The following configuration files are required to be created are. Assuming ./ is app root
-```ruby
-# - config
-# - - \ - database.yml
-# - - - - hosts.yml
-# - - \ - deploy.rb
-# - - \ - deploy \
-# - - \ - deploy \ - production.rb
+# Deletes the project folder and row in the project table of the database
+./lib/ignite.rb delete_project -p project_name
 ```
 
+##### RAKE
+Outrider is assumed to run on two machines - a dev and a production server. When you create a new project you do so on the dev server and it gets added to git, however in order to make a project runnable in production, there must be some entries in the database for that. Outrider has a rake command that is run from the dev server which creates the files and db entry on the dev server and also creates the necessary database entries on the production server. 
 
-#### Database
-*TODO add migrations*
-The mysql-based schema for the Outrider database is found at https://github.com/deadlysyntax/outrider/blob/master/config/schema.sql This is only a guide, and will in future be handled by Active Record.
-
-Set up a database, import the schema (if using mysql) and create the following file **./config/database.yml**. This file is expected by the system and will not run without these steps being complete properly.
-
-```yaml
-host:     localhost
-username: root
-password: root
-database: outrider
-adapter:  mysql2
+```shell
+rake project:build['project_name','project_domain']
 ```
 
+#### Customizing Projects
+Once created, a project consist of a file `./lib/projects/:project_name/auxiliary.rb` which contains a class whose public methods correspond to the CLI commands. 
 
-#### System Information
-Requires Ruby 2.2.1. Outrider is run on two machines. The development machine and the remote server and deployed using Capistrano. 
 
 #### Tests
 ```shell
