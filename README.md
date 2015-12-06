@@ -19,9 +19,9 @@ password: root
 database: outrider
 adapter:  mysql2
 ```
-* Create a new project `rake project:build['project_name','http://domain.com']` - give it a name and the url of the domain you want to work with. This creates the necessary entries in the database and generates a new folder in ./projects. It creates a file within the new project folder called auxiliary.rb. 
-* Edit auxiliary.rb to define what actions to take specific to this project. To crawl a domain, define a crawl method and within it use the Outrider API function `Outrider::Crawl::site()` and define what data you'd like to pull from each page.
-* Run `./lib/ignite.rb crawl -p project_name` to start the crawling process.
+* Create a new project `rake project:build['project_name','http://domain.com']` - giving it a name and the url of the domain you want to work with. This sets up the project in the database and generates a new folder in ./projects. It creates a file called auxiliary.rb within the new project folder
+* In each project's auxiliary.rb file is where we define our functionality specific to that new project (for example, to define what content to pull from each page on a domain).
+* Run `./lib/ignite.rb command -p project_name` to run each task.
 
 
 
