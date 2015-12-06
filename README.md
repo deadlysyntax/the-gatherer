@@ -10,6 +10,7 @@ Outrider lets you create multiple projects, each relating to a specific domain. 
 
 ### How to set up
 * Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory in your terminal.
+* Install dependencies 
 * Setup the database by importing ./config/schema.sql into MySQL - `mysql -u username -p database_name < ./config/schema.sql`
 * Create the database config file in your home directory `~/.outrider/config/database.yml` for storing environment-based database configuration. 
 
@@ -37,29 +38,34 @@ As mentioned above, when you create a new project, Outrider creates a new auxili
 rake project:build['nz_herald','http://nzherald.com']
 
 # /projects/nz_herald/auxiliary.rb
-# Returns scraped data from each page to be stored in the database
-# using the Outrider storage format.
+
+# crawl method maps to the first argument passed to the command line
 def crawl options
-OutriderTools::Crawl::site( @config, ->(page, uri){
-  unless(  page.css('.articleTitle').text.strip.empty? )
-    clean_date = DateTime.strptime(page.css('.storyDate').text.strip, '%a %b %d %H:%M:%S %Z %Y').to_s #Tue Mar 03 08:27:23 UTC 2015
-    return {
-      :title_raw                 => page.css('.articleTitle').text.strip,
-      :author                    => page.css('.authorName a').text.strip,
-      :content_raw               => page.css('#articleBody p').map{ |paragraph| paragraph.text.strip }.to_json,
-      :date_published_raw        => page.css('.storyDate').text.strip,
-      :date_published_timestamp  => clean_date,
-      :status                    => 'scraped'
-    }
-  else
-    return {
-      :status              => 'rejected'
-    }
-  end
-})
+	# This method is part of the Outrider API, which you have access to within your auxiliary.rb file
+	# @config passes our specific project data to the method
+	# the second argument is a callback which recieves the Nokogiri page object for every age that it visits. http://www.nokogiri.org/tutorials/searching_a_xml_html_document.html
+	OutriderTools::Crawl::site( @config, ->(page, uri){
+		# Select elements from the page using css selectors
+	  	unless(  page.css('.articleTitle').text.strip.empty? )
+			# Do any data processing from the page
+	    	clean_date = DateTime.strptime(page.css('.storyDate').text.strip, '%a %b %d %H:%M:%S %Z %Y').to_s #Tue Mar 03 08:27:23 UTC 2015
+			# Set the fields that get stored in the database for each page visited
+	    	return {
+	    		:title_raw                 => page.css('.articleTitle').text.strip,
+				:author                    => page.css('.authorName a').text.strip,
+	      	  	:content_raw               => page.css('#articleBody p').map{ |paragraph| paragraph.text.strip }.to_json,
+	      	  	:date_published_raw        => page.css('.storyDate').text.strip,
+	      	  	:date_published_timestamp  => clean_date,
+	      	  	:status                    => 'scraped'
+	    	}
+	  	else
+	    	return {
+	      	  :status              => 'rejected'
+	    	}
+	  	 end
+	})
 end
 ```
-
 
 
 ## How it works
