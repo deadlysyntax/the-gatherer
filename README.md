@@ -8,7 +8,7 @@ Outrider lets you create multiple projects, each relating to a specific domain. 
 
 
 
-### How to set up
+### How to get started
 * Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory in your terminal.
 * Install dependencies `bundle install`.
 * Setup the database by importing ./config/schema.sql into MySQL - `mysql -u username -p database_name < ./config/schema.sql`
