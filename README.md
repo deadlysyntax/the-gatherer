@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Outrider provides tools and structure for managing multiple web scraping and data analysis tasks. It is a command-line interface and useful for collecting, cleaning, storing and analysing data from the web.
+Outrider provides tools and structure for managing multiple web scraping and data analysis tasks. It provides a command-line interface to a powerful API, useful for collecting, cleaning, storing and analysing data from the web.
 
 Outrider lets you create multiple projects, each relating to a specific domain. Once set up, you use simple commands to run specific tasks for specific projects. 
 
