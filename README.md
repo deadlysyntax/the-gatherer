@@ -9,9 +9,9 @@ Outrider lets you create multiple projects, each relating to a specific domain. 
 
 
 ### How to set up
-1. Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory.
-2. Setup the database by importing ./config/schema.sql into MySQL - `mysql -u username -p database_name < ./config/schema.sql`
-3. Create the database config file in your home directory `~/.outrider/config/database.yml` for storing environment-based database configuration. 
+* Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory.
+* Setup the database by importing ./config/schema.sql into MySQL - `mysql -u username -p database_name < ./config/schema.sql`
+* Create the database config file in your home directory `~/.outrider/config/database.yml` for storing environment-based database configuration. 
 ```yaml
 host:     localhost
 username: root
@@ -19,9 +19,9 @@ password: root
 database: outrider
 adapter:  mysql2
 ```
-4. Create a new project `rake project:build['project_name','http://domain.com']` - give it a name and the url of the domain you want to work with. This creates the necessary entries in the database and generates a new folder in ./projects. It creates a file within the new project folder called auxiliary.rb. 
-5. Edit auxiliary.rb to define what actions to take specific to this project. To crawl a domain, define a crawl method and within it use the Outrider API function `Outrider::Crawl::site()` and define what data you'd like to pull from each page.
-6. Run `./lib/ignite.rb crawl -p project_name` to start the crawling process.
+* Create a new project `rake project:build['project_name','http://domain.com']` - give it a name and the url of the domain you want to work with. This creates the necessary entries in the database and generates a new folder in ./projects. It creates a file within the new project folder called auxiliary.rb. 
+* Edit auxiliary.rb to define what actions to take specific to this project. To crawl a domain, define a crawl method and within it use the Outrider API function `Outrider::Crawl::site()` and define what data you'd like to pull from each page.
+* Run `./lib/ignite.rb crawl -p project_name` to start the crawling process.
 
 
 
