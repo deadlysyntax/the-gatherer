@@ -37,16 +37,18 @@ class NzHerald < Project
     #p Frequency::Analyze::articles( raw_articles )
     
     
-    raw_articles = ProjectData.where( "project_id = ? AND content_raw IS NOT NULL", @config[:id] ).limit(10)
+    raw_articles = ProjectData.where( "project_id = ? AND content_raw IS NOT NULL", @config[:id] ).limit(100)
     
     paragraphs   = ''
     words        = []
 
     raw_articles.each do |article|
       #paragraphs   += OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) ) + ' '
-      text = OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) )
-      p Sentiment::Analyze::document( text )
-      p "\n\n" 
+      p article.url
+      text  = OutriderTools::Clean::word_array_to_string(  JSON.parse( article.content_raw ) )
+      score = Sentiment::Analyze::document( text )
+      p Sentiment::Analyze::positivity( score )
+      #p "\n\n" 
       
     end
 
@@ -54,7 +56,7 @@ class NzHerald < Project
     #p "***********"
     #words        = Frequency::Tools::word_frequency( OutriderTools::Clean::process_words_to_array( paragraphs ) )
     #words.sort_by { |word, frequency| frequency }
-    
+    #p words
   end
   
   

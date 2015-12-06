@@ -105,7 +105,8 @@ module OutriderTools
          @log.error "Invalid Redirection: #{e}"
        rescue Exception => e
          @log.error "Error #{e}"
-         raise e
+         #raise e
+         return { :status => e }
        end
        
        return { :status => 'rejected' }

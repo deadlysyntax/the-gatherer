@@ -6,7 +6,17 @@
 
 Built using Ruby and Python, Outrider's purpose is to provide an easy-to-use interface and set of tools to help create and run tasks that can programmatically visit, process, scrape, clean, store, analyse, access and display data from online sources. 
 
-Outrider projects are easily created using a rake command and your new project file automatically has access to the OutriderTools API and database. For examples 
+Outrider projects are easily created using a rake command and your new project file automatically has access to the OutriderTools API and database.
+
+
+### Features
+
+| Feature | Purpose |
+| ------- | ------- |
+Data Mining | Outrider provides tools for **collecting**, **cleaning** and **storing data** from the web. 
+Statistical Analysis | Outrider provides libraries for running **statistical algorithms** over datasets.
+	
+
 
 ```ruby  
 # creates a new project file
@@ -36,14 +46,6 @@ OutriderTools::Crawl::site( @config, ->(page, uri){
 end
 ```
 
-
-### Features
-
-| Feature | Purpose |
-| ------- | ------- |
-Data Mining | Outrider provides tools for **collecting**, **cleaning** and **storing data** from the web. 
-Statistical Analysis | Outrider provides libraries for running **statistical algorithms** over datasets.
-	
 
 
 ## How it works
@@ -214,6 +216,15 @@ Will go to the URL and run the callback and pass it the Nokogiri::HTML object an
 http://www.rubydoc.info/github/sparklemotion/nokogiri
 
 ________________________________
+# Analysis Tools
+
+## Sentiment Analysis
+
+
+## Frequency
+
+
+
 
 # Installation
 #### Git clone
