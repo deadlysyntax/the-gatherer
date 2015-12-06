@@ -9,7 +9,7 @@ Outrider lets you create multiple projects, each relating to a specific domain. 
 
 
 ### How to set up
-* Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory.
+* Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory in your terminal.
 * Setup the database by importing ./config/schema.sql into MySQL - `mysql -u username -p database_name < ./config/schema.sql`
 * Create the database config file in your home directory `~/.outrider/config/database.yml` for storing environment-based database configuration. 
 
