@@ -4,6 +4,11 @@
 
 Outrider provides tools and structure for managing multiple web scraping and data analysis tasks. It is a command-line interface and useful for collecting, cleaning, storing and analysing data from the web.
 
+Outrider lets you create multiple projects, each relating to a specific domain. Once set up, you use simple commands to run specific tasks for specific projects. 
+
+
+
+### Set up
 * Download Outrider `git clone https://github.com/deadlysyntax/outrider.git` and on the command-line change into the directory.
 * Setup database by importing ./config/schema.sql into MySQL. Create a new file in ./config/database.yml to specify db connection details.
 * Create a new project `rake project:build['project_name','http://domain.com']` - give it a name and the url of the domain you want to work with. This creates the necessary entries in the database and generates a new folder in ./projects. It creates a file within the new project folder called auxiliary.rb. 
@@ -11,13 +16,6 @@ Outrider provides tools and structure for managing multiple web scraping and dat
 * Run `./lib/ignite.rb crawl -p project_name` to start the crawling process.
 
 
-### Features
-
-| Feature | Purpose |
-| ------- | ------- |
-Data Mining | Outrider provides tools for **collecting**, **cleaning** and **storing data** from the web. 
-Statistical Analysis | Outrider provides libraries for running **statistical algorithms** over datasets.
-	
 
 
 ```ruby  
