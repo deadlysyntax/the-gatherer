@@ -68,13 +68,43 @@ end
 ```
 
 
-## How it works
+### How it works
 #### Command Line Interface
-At it's basic level, Outrider provides a command line interface, whose commands give us the ability to call and pass arguments to our API. The Command line is used by running `./lib/ignite.rb`. When you call this file through your shell, you must pass it a command to run and any arguments to pass through to the command. Such as:
+Outrider's goal is to provide a conventional way to create data scraping projects and run tasks for each project, and to make it so that once a task is created, it's easy to run regularly. Your interface for running tasks is the command line. Here I will describe the anatomy of an Outrider command. 
 
+A command is made of several parts:
 ```shell
 ./lib/ignite.rb crawl -p project_name
 ```
+
+* **Script:**`./lib/ignite.rb` is the core file which processes our commands. This is the script we run. 
+* **Command:** `crawl` is the task to run. This part of the command is mapped to a function you define within auxiliary.rb. 
+* **Project:** `-p project_name` specifies which project to run. Outrider will look to the functions within the specified project's auxiliary.rb file.
+
+Any functions that you'd like to run via the CLI must be defined in both `commandify.rb` and your project's `auxiliary.rb`. Outrider comes with some predefined commands set up, which you can write functions for in auxiliary.rb, but you can also extend Outrider and define your own
+
+```shell
+# in ./lib/outrider/commandify.rb
+module Commandify
+  def self.process
+    # Place custom command options here. See instructions at http://manageiq.github.io/trollop/
+    sub_commands << %w()
+    # Set these to accept arguments through the command line and pass them to your auxiliary methods
+    command_opts = Trollop::options do
+      # REQUIRED. Do not mess with the default options. 
+      # Do not duplicate arguments or their short form. 
+      # Run tests after modifying
+      # opt :domain, "The domain", :short => "-d", :type => String, :default => ''
+
+
+      # CUSTOM. Place custom command options here
+
+
+    end
+  end
+end
+```
+
 
 #### API
 The commands that can be recognised and run through the CLI form the *Outrider API*. The API sits behind and is accessed through the the command line. Actions that are common to the purposes of Outriders main goals - such as crawling and scraping, are made available publicly by the API and can be called by passing it as the first argument to `./lib/ignite.rb` when using the CLI. In the above example, the word *crawl* is a method of the Outrider API and `-p project_name` tells the API which project to look for the *crawl* implementation.
@@ -101,27 +131,7 @@ Commands are handled by a gem called Trollop
 * Always run tests `rspec spec` after modifying this
 * TODO - move this functionality into an setup where they don't have to touch commandify.rb
 
-```ruby
-# in ./lib/outrider/commandify.rb
-module Commandify
-  def self.process
-	# Place custom command options here. See instructions at http://manageiq.github.io/trollop/
-	sub_commands << %w()
-	# Set these to accept arguments through the command line and pass them to your auxiliary methods
-	command_opts = Trollop::options do
-	  # REQUIRED. Do not mess with the default options. 
-	  # Do not duplicate arguments or their short form. 
-	  # Run tests after modifying
-	  # opt :domain, "The domain", :short => "-d", :type => String, :default => ''
 
-
-	  # CUSTOM. Place custom command options here
-		
-		
-	end
-  end
-end
-```
 
 
 ##### In your command line
