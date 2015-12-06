@@ -9,8 +9,7 @@ Outrider lets you create multiple projects, each relating to a specific domain. 
 
 
 ### Set up
-* ###Download
-	Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory.
+* Download Outrider using the command line `git clone https://github.com/deadlysyntax/outrider.git` and change into the new directory.
 * Setup the database by importing ./config/schema.sql into MySQL. 
 * Create a new file in ./config/database.yml to specify db connection details.
 * Create a new project `rake project:build['project_name','http://domain.com']` - give it a name and the url of the domain you want to work with. This creates the necessary entries in the database and generates a new folder in ./projects. It creates a file within the new project folder called auxiliary.rb. 
