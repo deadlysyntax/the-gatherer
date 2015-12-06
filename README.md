@@ -222,10 +222,6 @@ Outrider is assumed to run on two machines - a dev and a production server. When
 rake project:build['project_name','project_domain']
 ```
 
-#### Customizing Projects
-Once created, a project consist of a file `./lib/projects/:project_name/auxiliary.rb` which contains a class whose public methods correspond to the CLI commands. 
-
-
 #### Tests
 ```shell
 # in project root ./
