@@ -36,14 +36,14 @@ namespace :project  do
     # add project to local system
     sh "#{@dev['ignite_path']} create_project -p #{args[:title]} -d #{args[:domain]}"
     # ssh and run on production server
-    begin
-      ssh = Net::SSH.start(@prod['host'], @prod['user'], :port => @prod['port'], :password => @prod['password'] )
-      res = ssh.exec!(command)
-      ssh.close
-      puts res
-    rescue Exception => e
-      puts "Unable to connect to #{@prod['host']} using #{@prod['user']} :: #{e}"
-    end
+    #begin
+    #  ssh = Net::SSH.start(@prod['host'], @prod['user'], :port => @prod['port'], :password => @prod['password'] )
+    #  res = ssh.exec!(command)
+    #  ssh.close
+    #  puts res
+    #rescue Exception => e
+    #  puts "Unable to connect to #{@prod['host']} using #{@prod['user']} :: #{e}"
+    #end
   end
   
   
